@@ -1,0 +1,29 @@
+# Generated artifacts
+/03-wordlists/index/wordlist.db
+/03-wordlists/index/wordlist.db-journal
+/03-wordlists/index/wordlist.db-wal
+/03-wordlists/index/wordlist.db-shm
+/00-governance/manifests/ssa-manifest.json
+/dist/
+/build/
+/out/
+
+# Editors / OS
+.vscode/
+.idea/
+*.swp
+Thumbs.db
+.DS_Store
+desktop.ini
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.mypy_cache/
+.pytest_cache/
+
+# Local scratch
+/.ssactl-cache/
+*.local

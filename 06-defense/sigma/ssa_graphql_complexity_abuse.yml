@@ -1,0 +1,15 @@
+title: graphql complexity abuse
+id: ssa_ssa_graphql_complexity_abuse
+status: experimental
+description: Auto-tracked detection for graphql complexity abuse under the Sovereign Security Archive crosswalk.
+author: Sovereign Security Archive
+date: 2026-01-15
+logsource:
+  product: windows
+  category: process_creation
+detection:
+  selection:
+    CommandLine|contains: 'graphql_complexity_abuse'
+  condition: selection
+level: high
+tags: [attack.defense_evasion]

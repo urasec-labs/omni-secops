@@ -1,0 +1,33 @@
+control_id,sheet,title,severity,cwe_id,owasp_top10,anchor_layer,anchor_id,provenance
+CSRF-1,Cross_Site_Request_Forgery_Cheat_Sheet,Use anti-CSRF tokens for state-changing requests,critical,CWE-352,A01:2021,network,3001010,OWASPCS@master@2026-01-14
+CSRF-2,Cross_Site_Request_Forgery_Cheat_Sheet,SameSite cookie attribute plus token validation,critical,CWE-352,A01:2021,host,86650,OWASPCS@master@2026-01-14
+AUTH-1,Authentication_Cheat_Sheet,Multi-factor authentication on privileged paths,critical,CWE-308,A07:2021,host,86651,OWASPCS@master@2026-01-14
+AUTH-2,Authentication_Cheat_Sheet,Server-side session store with strong identifiers,high,CWE-384,A07:2021,application,SESSION-2,OWASPCS@master@2026-01-14
+AUTH-3,Authentication_Cheat_Sheet,Re-authenticate for sensitive operations,high,CWE-306,A07:2021,application,AUTH-3,OWASPCS@master@2026-01-14
+AUTH-4,Authentication_Cheat_Sheet,Rate limit and lock out on failed logins,high,CWE-307,A07:2021,host,86630,OWASPCS@master@2026-01-14
+AUTH-7,Authentication_Cheat_Sheet,Authentication error messages must be generic,high,CWE-209,A07:2021,audit,86652,OWASPCS@master@2026-01-14
+AUTHZ-2,Authorization_Cheat_Sheet,Deny by default on every request,critical,CWE-863,A01:2021,application,AUTHZ-2,OWASPCS@master@2026-01-14
+AUTHZ-3,Authorization_Cheat_Sheet,Server-side authorization on every data access,high,CWE-862,A01:2021,audit,86653,OWASPCS@master@2026-01-14
+SESSION-3,Session_Management_Cheat_Sheet,Rotate session identifier after privilege change,high,CWE-384,A07:2021,audit,86654,OWASPCS@master@2026-01-14
+SESSION-4,Session_Management_Cheat_Sheet,Set Secure HttpOnly SameSite on session cookies,high,CWE-1004,A07:2021,network,3001011,OWASPCS@master@2026-01-14
+INPUT-4,Input_Validation_Cheat_Sheet,Server-side validation against an allow-list,high,CWE-20,A04:2021,network,3001001,OWASPCS@master@2026-01-14
+INPUT-8,Input_Validation_Cheat_Sheet,Validate and sanitise URLs used for server-side requests,high,CWE-918,A10:2021,network,3001002,OWASPCS@master@2026-01-14
+INJ-1,SQL_Injection_Cheat_Sheet,Use parameterised queries for every data access,critical,CWE-89,A03:2021,network,3001003,OWASPCS@master@2026-01-14
+INJ-2,SQL_Injection_Cheat_Sheet,Use least privilege database accounts,high,CWE-284,A03:2021,audit,86655,OWASPCS@master@2026-01-14
+DOM-1,XSS_Prevention_Cheat_Sheet,Context-aware output encoding at every sink,high,CWE-79,A03:2021,network,3001004,OWASPCS@master@2026-01-14
+DOM-4,XSS_Prevention_Cheat_Sheet,Content Security Policy without unsafe-inline,high,CWE-1021,A05:2021,network,3001005,OWASPCS@master@2026-01-14
+DES-3,Deserialization_Cheat_Sheet,Use cryptographic integrity for serialized data,medium,CWE-502,A08:2021,audit,86656,OWASPCS@master@2026-01-14
+UPL-2,File_Upload_Cheat_Sheet,Allow-list extensions and set the filename server-side,high,CWE-434,A01:2021,host,86670,OWASPCS@master@2026-01-14
+UPL-5,File_Upload_Cheat_Sheet,Store uploads outside the web root,high,CWE-434,A01:2021,network,3001006,OWASPCS@master@2026-01-14
+LOG-4,Logging_Cheat_Sheet,Encode log data to prevent log injection,medium,CWE-117,A09:2021,host,86657,OWASPCS@master@2026-01-14
+LOG-7,Logging_Cheat_Sheet,Alert on security events in near real time,medium,CWE-778,A09:2021,network,3001007,OWASPCS@master@2026-01-14
+CRYPTO-1,Cryptographic_Storage_Cheat_Sheet,Use modern authenticated encryption,high,CWE-327,A02:2021,host,86658,OWASPCS@master@2026-01-14
+CRYPTO-4,Cryptographic_Storage_Cheat_Sheet,Do not use ECB mode or static IV,high,CWE-327,A02:2021,host,86659,OWASPCS@master@2026-01-14
+SECRETS-3,Secrets_Management_Cheat_Sheet,Rotate secrets on a schedule and on exposure,high,CWE-798,A07:2021,audit,86660,OWASPCS@master@2026-01-14
+REST-1,REST_Security_Cheat_Sheet,Use HTTPS for all communications,high,CWE-319,A02:2021,network,3001008,OWASPCS@master@2026-01-14
+REST-7,REST_Security_Cheat_Sheet,Validate Content-Type and reject unsupported media,medium,CWE-436,A04:2021,network,3001009,OWASPCS@master@2026-01-14
+GQL-2,GraphQL_Cheat_Sheet,Disable introspection and batching in production,medium,CWE-200,A05:2021,network,3001012,OWASPCS@master@2026-01-14
+GQL-4,GraphQL_Cheat_Sheet,Limit query depth and complexity,high,CWE-400,A05:2021,application,GQL-4,OWASPCS@master@2026-01-14
+LLM-01,LLM_Prompt_Injection_Cheat_Sheet,Segregate untrusted content from instructions,critical,CWE-1427,A01:2021,application,SSA-LLM-01,OWASPCS@master@2026-01-14
+LLM-02,LLM_Prompt_Injection_Cheat_Sheet,Validate and sanitise model output before use,high,CWE-1426,A02:2021,application,SSA-LLM-02,OWASPCS@master@2026-01-14
+LLM-05,LLM_Prompt_Injection_Cheat_Sheet,Apply least privilege to data access tools given to models,high,CWE-250,A01:2021,audit,86661,OWASPCS@master@2026-01-14

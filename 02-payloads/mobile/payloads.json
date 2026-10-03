@@ -1,0 +1,16 @@
+{
+  "schema": "12-schemas/payload.schema.json",
+  "corpus_id": "PL-MOBILE",
+  "version": "1.0.0",
+  "provenance": { "source": "PAT", "ref": "master@2026-01-15" },
+  "payloads": [
+    { "payload_id": "PL-MOB-0001", "cwe_id": "CWE-939", "context": "deeplink", "surface": "uri", "engine": "android", "payload": "app://deeplink?url=https://evil.example", "severity": "medium", "tags": ["deeplink", "open-redirect"], "classification": "T0" },
+    { "payload_id": "PL-MOB-0002", "cwe_id": "CWE-502", "context": "ipc", "surface": "intent-extra", "engine": "android", "payload": "intent://scan/#Intent;scheme=zxing;package=com.example;end", "severity": "medium", "tags": ["intent", "component-exported"], "classification": "T0" },
+    { "payload_id": "PL-MOB-0003", "cwe_id": "CWE-926", "context": "exposure", "surface": "backup", "engine": "android", "payload": "adb backup -f backup.ab com.example.app", "severity": "high", "tags": ["backup", "data-extraction"], "classification": "T1" },
+    { "payload_id": "PL-MOB-0004", "cwe_id": "CWE-312", "context": "storage", "surface": "file", "engine": "android", "payload": "/sdcard/Android/data/com.example.app/files/token", "severity": "high", "tags": ["insecure-storage"], "classification": "T1" },
+    { "payload_id": "PL-MOB-0005", "cwe_id": "CWE-359", "context": "ipc", "surface": "pasteboard", "engine": "ios", "payload": "pbpaste:// clipboard content read by app", "severity": "low", "tags": ["clipboard"], "classification": "T0" },
+    { "payload_id": "PL-MOB-0006", "cwe_id": "CWE-319", "context": "network", "surface": "header", "engine": "ios", "payload": "ATS exception: NSAllowsArbitraryLoads", "severity": "medium", "tags": ["cleartext", "ats"], "classification": "T0" },
+    { "payload_id": "PL-MOB-0007", "cwe_id": "CWE-295", "context": "network", "surface": "certificate", "engine": "android", "payload": "custom TrustManager accepting all certificates", "severity": "high", "tags": ["tls-bypass"], "classification": "T0" },
+    { "payload_id": "PL-MOB-0008", "cwe_id": "CWE-841", "context": "component", "surface": "activity", "engine": "android", "payload": "android:exported=true android:permission=none", "severity": "high", "tags": ["exported-component"], "classification": "T0" }
+  ]
+}

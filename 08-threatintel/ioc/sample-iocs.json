@@ -1,0 +1,16 @@
+{
+  "schema": "12-schemas/ioc.schema.json",
+  "set_id": "IOCSET-SAMPLE",
+  "classification": "T1",
+  "provenance": { "source": "AWETI", "ref": "master@2026-01-05" },
+  "iocs": [
+    { "id": "IOC-2026-000001", "type": "domain",     "value": "c2.malicious.example",     "confidence": 95, "severity": "critical", "source": "FEED-002", "first_seen": "2026-01-10T00:00:00Z", "last_seen": "2026-01-15T00:00:00Z", "tlp": "amber", "tags": ["c2"], "mitre": ["T1071.001"], "expires": "2026-04-10T00:00:00Z", "context": "HTTP beaconing sample" },
+    { "id": "IOC-2026-000002", "type": "ipv4",       "value": "203.0.113.42",              "confidence": 90, "severity": "high",     "source": "FEED-004", "first_seen": "2026-01-11T00:00:00Z", "last_seen": "2026-01-15T00:00:00Z", "tlp": "amber", "tags": ["c2", "botnet"], "mitre": ["T1071"], "expires": "2026-04-11T00:00:00Z", "context": "botnet C2 list" },
+    { "id": "IOC-2026-000003", "type": "file",       "value": "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f", "confidence": 100, "severity": "critical", "source": "FEED-001", "first_seen": "2026-01-12T00:00:00Z", "last_seen": "2026-01-12T00:00:00Z", "tlp": "amber", "tags": ["malware", "loader"], "mitre": ["T1105"], "expires": "2027-01-12T00:00:00Z", "context": "loader sample SHA-256" },
+    { "id": "IOC-2026-000004", "type": "url",        "value": "http://malicious.example/login.php?cmd=", "confidence": 88, "severity": "high", "source": "FEED-002", "first_seen": "2026-01-12T00:00:00Z", "last_seen": "2026-01-14T00:00:00Z", "tlp": "amber", "tags": ["c2"], "mitre": ["T1071.001"], "expires": "2026-04-12T00:00:00Z", "context": "gate panel" },
+    { "id": "IOC-2026-000005", "type": "domain",     "value": "phish-target.example",       "confidence": 72, "severity": "medium",   "source": "FEED-007", "first_seen": "2026-01-13T00:00:00Z", "last_seen": "2026-01-13T00:00:00Z", "tlp": "amber", "tags": ["phishing"], "mitre": ["T1566.002"], "expires": "2026-04-13T00:00:00Z", "context": "warnlist entry, score do not block" },
+    { "id": "IOC-2026-000006", "type": "registry",   "value": "HKCU\\Software\\Classes\\ms-settings\\shell\\open\\command", "confidence": 99, "severity": "critical", "source": "FEED-008", "first_seen": "2026-01-14T00:00:00Z", "last_seen": "2026-01-15T00:00:00Z", "tlp": "green", "tags": ["persistence"], "mitre": ["T1547.001"], "expires": "2026-07-14T00:00:00Z", "context": "internal enrichment" },
+    { "id": "IOC-2026-000007", "type": "user-agent", "value": "Mozilla/5.0 (compatible; BeaconScript/2.1)", "confidence": 65, "severity": "low", "source": "FEED-008", "first_seen": "2026-01-14T00:00:00Z", "last_seen": "2026-01-15T00:00:00Z", "tlp": "green", "tags": ["c2"], "mitre": ["T1071.001"], "expires": "2026-02-14T00:00:00Z", "context": "detection only, never block on UA alone" },
+    { "id": "IOC-2026-000008", "type": "mutex",      "value": "Global\\SSA-Demo-4C1F",     "confidence": 97, "severity": "high",     "source": "FEED-008", "first_seen": "2026-01-15T00:00:00Z", "last_seen": "2026-01-15T00:00:00Z", "tlp": "green", "tags": ["malware"], "mitre": ["T1547.001"], "expires": "2026-04-15T00:00:00Z", "context": "lab emulation EV-WIN-0003" }
+  ]
+}

@@ -1,0 +1,35 @@
+control_id,sheet,severity,cwe_id,anchor_layer,anchor_kind,suricata_sid,wazuh_rule,sigma_rule,suricata_file,wazuh_file,confidence,residual_gap,reviewed
+CSRF-1,Cross_Site_Request_Forgery_Cheat_Sheet,critical,CWE-352,network,suricata,3001011,,,ssa-web-attacks.rules,,medium,TLS-terminated bodies invisible,2026-01-15
+CSRF-2,Cross_Site_Request_Forgery_Cheat_Sheet,critical,CWE-352,host,wazuh,,100012,ssa_web_csrf_missing_token.yml,ssa-baseline.xml,medium,Only for apps writing structured logs,2026-01-15
+AUTH-1,Authentication_Cheat_Sheet,critical,CWE-308,host,wazuh,,100010,ssa_auth_mfa_bypass_attempt.yml,ssa-baseline.xml,medium,Successful MFA-less access is hard to detect,2026-01-15
+AUTH-2,Authentication_Cheat_Sheet,high,CWE-384,application,sigma,,,ssa_session_weak_identifier.yml,,medium,Needs application telemetry,2026-01-15
+AUTH-3,Authentication_Cheat_Sheet,high,CWE-306,application,sigma,,,ssa_sensitive_action_no_reauth.yml,,medium,Needs application telemetry,2026-01-15
+AUTH-4,Authentication_Cheat_Sheet,high,CWE-307,host,wazuh,,100011,,ssa-baseline.xml,high,,2026-01-15
+AUTH-7,Authentication_Cheat_Sheet,high,CWE-209,audit,wazuh,,100012,ssa_auth_user_enumeration.yml,ssa-baseline.xml,medium,Successful enumeration without a follow-on logon is invisible,2026-01-15
+AUTHZ-2,Authorization_Cheat_Sheet,critical,CWE-863,application,sigma,,,ssa_authz_deny_by_default.yml,,medium,Needs application telemetry,2026-01-15
+AUTHZ-3,Authorization_Cheat_Sheet,high,CWE-862,audit,wazuh,,100013,ssa_authz_missing_check.yml,ssa-baseline.xml,medium,Silent IDOR leaves no host evidence,2026-01-15
+SESSION-3,Session_Management_Cheat_Sheet,high,CWE-384,audit,wazuh,,100014,ssa_session_rotation_missing.yml,ssa-baseline.xml,medium,,2026-01-15
+SESSION-4,Session_Management_Cheat_Sheet,high,CWE-1004,network,suricata,3001012,,,ssa-web-attacks.rules,,high,,2026-01-15
+INPUT-4,Input_Validation_Cheat_Sheet,high,CWE-20,network,suricata,3001001,,,ssa-web-attacks.rules,,high,,2026-01-15
+INPUT-8,Input_Validation_Cheat_Sheet,high,CWE-918,network,suricata,3001003,,,ssa-web-attacks.rules,,high,,2026-01-15
+INJ-1,SQL_Injection_Cheat_Sheet,critical,CWE-89,network,suricata,3001005,,,ssa-web-attacks.rules,,high,Encrypted traffic,2026-01-15
+INJ-1,SQL_Injection_Cheat_Sheet,critical,CWE-89,host,wazuh,,100020,,ssa-baseline.xml,ssa-baseline.xml,high,,2026-01-15
+INJ-2,SQL_Injection_Cheat_Sheet,high,CWE-284,audit,wazuh,,100015,,ssa-baseline.xml,ssa-baseline.xml,medium,Needs database audit forwarding,2026-01-15
+DOM-1,XSS_Prevention_Cheat_Sheet,high,CWE-79,network,suricata,3001006,,,ssa-web-attacks.rules,,high,,2026-01-15
+DOM-1,XSS_Prevention_Cheat_Sheet,high,CWE-79,host,wazuh,,100021,,ssa-baseline.xml,ssa-baseline.xml,high,,2026-01-15
+DOM-4,XSS_Prevention_Cheat_Sheet,high,CWE-1021,network,suricata,3001005,,,ssa-web-attacks.rules,,medium,CSP header presence needs TLS termination,2026-01-15
+UPL-2,File_Upload_Cheat_Sheet,high,CWE-434,host,wazuh,,100030,,ssa-baseline.xml,ssa-baseline.xml,high,,2026-01-15
+UPL-5,File_Upload_Cheat_Sheet,high,CWE-434,network,suricata,3001007,,,ssa-web-attacks.rules,,medium,,2026-01-15
+LOG-4,Logging_Cheat_Sheet,medium,CWE-117,host,wazuh,,100032,,ssa-baseline.xml,ssa-baseline.xml,high,,2026-01-15
+LOG-7,Logging_Cheat_Sheet,medium,CWE-778,network,suricata,3001007,,,ssa-web-attacks.rules,,medium,,2026-01-15
+CRYPTO-1,Cryptographic_Storage_Cheat_Sheet,high,CWE-327,host,sigma,,,ssa_crypto_weak_algorithm.yml,,medium,Needs code or library telemetry,2026-01-15
+CRYPTO-4,Cryptographic_Storage_Cheat_Sheet,high,CWE-327,host,sigma,,,ssa_crypto_ecb_static_iv.yml,,medium,Needs code or library telemetry,2026-01-15
+SECRETS-3,Secrets_Management_Cheat_Sheet,high,CWE-798,audit,wazuh,,100016,ssa_secret_in_log.yml,ssa-baseline.xml,medium,,2026-01-15
+REST-1,REST_Security_Cheat_Sheet,high,CWE-319,network,suricata,3001009,,,ssa-web-attacks.rules,,medium,Only cleartext traffic is visible,2026-01-15
+REST-7,REST_Security_Cheat_Sheet,medium,CWE-436,network,suricata,3001010,,,ssa-web-attacks.rules,,high,,2026-01-15
+GQL-2,GraphQL_Cheat_Sheet,medium,CWE-200,network,suricata,3001013,,,ssa-web-attacks.rules,,medium,Encrypted traffic,2026-01-15
+GQL-4,GraphQL_Cheat_Sheet,high,CWE-400,application,sigma,,,ssa_graphql_complexity_abuse.yml,,medium,Needs gateway telemetry,2026-01-15
+LLM-01,LLM_Prompt_Injection_Cheat_Sheet,critical,CWE-1427,application,sigma,,,ssa_llm_prompt_injection.yml,,medium,Semantic evasion,2026-01-15
+LLM-02,LLM_Prompt_Injection_Cheat_Sheet,high,CWE-1426,application,sigma,,,ssa_llm_output_schema_violation.yml,,medium,Semantic evasion,2026-01-15
+LLM-05,LLM_Prompt_Injection_Cheat_Sheet,high,CWE-250,audit,sigma,,,ssa_llm_tool_privilege_escalation.yml,,medium,Needs gateway audit,2026-01-15
+DES-3,Deserialization_Cheat_Sheet,medium,CWE-502,audit,sigma,,,ssa_deserialization_integrity.yml,,medium,,2026-01-15

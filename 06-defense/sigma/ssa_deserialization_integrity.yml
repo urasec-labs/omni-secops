@@ -1,0 +1,15 @@
+title: Insecure deserialization - integrity failure on serialized payload
+id: ssa_deserialization_integrity
+status: experimental
+description: Detects deserialization without integrity verification (DES-3 control).
+author: Sovereign Security Archive
+date: 2026-01-15
+logsource:
+  product: windows
+  category: process_creation
+detection:
+  selection:
+    CommandLine|contains: 'deserialize'
+  condition: selection
+level: medium
+tags: [attack.defense_evasion]

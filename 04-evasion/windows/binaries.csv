@@ -1,0 +1,27 @@
+binary,platform,evasion_id,technique_id,category,requires_argument,network_capable,cmdline_pattern,sigma_rule,host_rule,network_rule
+certutil.exe,windows,EV-WIN-0005,T1105,download,true,true,-urlcache -split|bitsadmin /transfer,ssa_windows_certutil.yml,4698,3001304
+bitsadmin.exe,windows,EV-WIN-0004,T1197,download,true,true,/transfer .*http,ssa_windows_bitsadmin.yml,4698,3001303
+mshta.exe,windows,EV-WIN-0007,T1218.005,execution,true,true,https?://|javascript:,ssa_windows_mshta.yml,4698,3001306
+regsvr32.exe,windows,EV-WIN-0006,T1218.010,execution,true,true,/i:.*\.dll|scrobj\.dll,ssa_windows_regsvr32.yml,4698,3001305
+installutil.exe,windows,EV-WIN-0008,T1218.003,execution,true,false,/U /C .*\.dll,ssa_windows_installutil.yml,4698,3001307
+msbuild.exe,windows,EV-WIN-0009,T1059.001,execution,true,false,InlineTask|UsingTask,ssa_windows_msbuild_inline.yml,4698,3001308
+cmstp.exe,windows,EV-WIN-0012,T1218.003,execution,true,true,/s .*https?://,ssa_windows_cmstp.yml,4698,3001309
+wmic.exe,windows,EV-WIN-0013,T1047,execution,true,true,process call create|/node:,ssa_windows_wmi_exec.yml,4672,
+CLMXRANSOM.exe,windows,EV-WIN-0010,T1218.003,execution,true,true,-inmemory|%.inf,ssa_windows_clmxransom.yml,4698,
+rundll32.exe,windows,EV-WIN-0006,T1218.005,execution,true,true,javascript:|http://|file://\,ssa_windows_rundll32.yml,4698,3001311
+msiexec.exe,windows,EV-WIN-0014,T1218.005,execution,true,true,/i .*https?://|/qn,ssa_windows_msiexec.yml,4698,3001310
+schtasks.exe,windows,EV-WIN-0003,T1053.005,persistence,false,false,/create .*/tn,ssa_windows_schtasks.yml,4698,3001302
+hh.exe,windows,EV-WIN-0006,T1218.005,execution,true,true,https?://.+\.chm,ssa_windows_hh_chm.yml,4698,3001312
+forfiles.exe,windows,EV-WIN-0006,T1059.003,execution,true,false,/c .*cmd|command,ssa_windows_forfiles.yml,4698,3001313
+find,linux,EV-LNX-0001,T1218.003,privesc,false,false,-exec .*sh|,ffa_linux_find_exec.yml,86690,
+vim,linux,EV-LNX-0002,T1218.003,privesc,false,false,^:|vim -c,ssa_linux_editor_shell.yml,86691,
+awk,linux,EV-LNX-0004,T1218.003,privesc,false,false,BEGIN.*system|awk 'BEGIN,ssa_linux_awk_shell.yml,86693,
+perl,linux,EV-LNX-0005,T1059.006,privesc,false,false,perl -e .*exec|perl -e .*system,ssa_interpreter_shell.yml,86694,
+python,linux,EV-LNX-0006,T1059.006,privesc,false,false,python -c|os.system|os.popen,ssa_interpreter_shell.yml,86694,
+env,linux,EV-LNX-0009,T1218.003,privesc,false,false,env /bin/sh|env .*sh -c,ssa_linux_env_shell.yml,86690,
+sudo,linux,EV-LNX-0007,T1548.003,privesc,false,false,sudo -l|sudo .*(find|awk|vi|less|env|tar),ssa_linux_sudo_nonshell.yml,86695,
+crontab,linux,EV-LNX-0016,T1053.003,persistence,false,false,crontab -|crontab -e,ssa_linux_cron_persistence.yml,86702,3001201
+osascript,macos,EV-MAC-0001,T1059.002,execution,false,false,do shell script,ssa_macos_osascript_shell.yml,4624,
+security,macos,EV-MAC-0002,T1552.001,credentials,false,false,find-generic-password|find-internet-password,ssa_macos_keychain_read.yml,4624,
+docker,kubernetes,EV-CTR-0001,T1610,container-escape,false,true,--privileged|/var/run/docker.sock,ssa_docker_privileged_run.yml,86703,
+nsenter,linux,EV-CTR-0005,T1610,container-escape,false,false,nsenter -t,ssa_linux_nsenter.yml,86703,

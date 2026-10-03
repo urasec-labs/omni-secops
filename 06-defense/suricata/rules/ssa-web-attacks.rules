@@ -1,0 +1,44 @@
+# Sovereign Security Archive - Suricata web attack rules
+# sid range 3001000-3001199 reserved for SSA web/application detections
+# mapping: 10-crosswalk/control-detection/control-detection.csv
+#
+# 3001001 INPUT-4  server-side validation allow-list (SQLi tautology probe)
+# 3001002 INPUT-8  SSRF / metadata access
+# 3001003 INJ-1    parameterised query bypass attempt (SQL keywords)
+# 3001004 DOM-1    reflected XSS probe
+# 3001005 DOM-4    CSP report ingestion
+# 3001006 UPL-5    upload attempt with executable extension
+# 3001007 LOG-7    log forging attempt
+# 3001008 REST-1   cleartext credential POST
+# 3001009 REST-7   unsupported content type on API
+# 3001010 CSRF-1    missing/blank CSRF token on state-changing request
+# 3001011 SESSION-4 session cookie without Secure attribute
+# 3001012 GQL-2    GraphQL introspection in production
+
+alert http $HOME_NET any -> $EXTERNAL_NET any (msg:"SSA INPUT-4 SQL injection boolean tautology probe"; flow:established,to_server; http.uri; content:"%27%20OR%20%271%27%3D%271"; nocase; http.query; content:"%27%20OR%201%3D1"; nocase; classtype:web-application-attack; reference:url,ssa.local/controls/INPUT-4; sid:3001001; rev:1; metadata:attack_target Web_Server, deployment Perimeter;)
+
+alert http $HOME_NET any -> $EXTERNAL_NET any (msg:"SSA INPUT-4 SQLi time-based probe (SLEEP)"; flow:established,to_server; http.uri; content:"SLEEP("; nocase; http.uri; content:"pg_sleep("; nocase; http.uri; content:"WAITFOR%20DELAY"; nocase; classtype:web-application-attack; reference:url,ssa.local/controls/INPUT-4; sid:3001002; rev:1;)
+
+alert http $HOME_NET any -> $EXTERNAL_NET any (msg:"SSA INPUT-8 SSRF attempt to cloud metadata service"; flow:established,to_server; http.uri; content:"169.254.169.254"; nocase; http.uri; content:"metadata.google.internal"; nocase; http.host; content:"100.100.100.200"; nocase; classtype:attempted-recon; reference:url,ssa.local/controls/INPUT-8; sid:3001003; rev:1;)
+
+alert http $HOME_NET any -> $EXTERNAL_NET any (msg:"SSA INJ-1 JNDI lookup probe (Log4Shell class)"; flow:established,to_server; http.uri; content:"${jndi:"; nocase; http.header; content:"${jndi:"; nocase; http.user_agent; content:"${jndi:"; nocase; classtype:web-application-attack; reference:url,ssa.local/controls/INJ-1; sid:3001004; rev:1;)
+
+alert http $HOME_NET any -> $EXTERNAL_NET any (msg:"SSA INJ-1 UNION SELECT injection probe"; flow:established,to_server; http.uri; content:"UNION"; nocase; http.uri; content:"SELECT"; nocase; http.query; content:"UNION%20SELECT"; nocase; classtype:web-application-attack; reference:url,ssa.local/controls/INJ-1; sid:3001005; rev:1;)
+
+alert http $HOME_NET any -> $EXTERNAL_NET any (msg:"SSA DOM-1 reflected XSS probe"; flow:established,to_server; http.uri; content:"<script"; nocase; http.uri; content:"onerror="; nocase; http.uri; content:"javascript:"; nocase; http.query; content:"%3Cscript"; nocase; classtype:web-application-attack; reference:url,ssa.local/controls/DOM-1; sid:3001006; rev:1;)
+
+alert http $HOME_NET any -> $EXTERNAL_NET any (msg:"SSA UPL-5 executable file upload extension"; flow:established,to_server; http.uri; content:".php"; nocase; http.uri; content:".jsp"; nocase; http.uri; content:".aspx"; nocase; http.uri; content:".phtml"; nocase; http.uri; content:".exe"; nocase; http.content_type; content:"multipart/form-data"; classtype:web-application-attack; reference:url,ssa.local/controls/UPL-5; sid:3001007; rev:1;)
+
+alert http $HOME_NET any -> $EXTERNAL_NET any (msg:"SSA LOG-7 log forging attempt via CRLF in request"; flow:established,to_server; http.uri; content:"%0d%0a"; http.uri; content:"%0a"; http.uri; content:"%0d"; classtype:web-application-attack; reference:url,ssa.local/controls/LOG-7; sid:3001008; rev:1;)
+
+alert http $HOME_NET any -> $EXTERNAL_NET any (msg:"SSA REST-1 cleartext credentials submitted over HTTP"; flow:established,to_server; http.method; content:"POST"; http.request_body; content:"password"; nocase; http.request_body; content:"passwd"; nocase; classtype:policy-violation; reference:url,ssa.local/controls/REST-1; sid:3001009; rev:1;)
+
+alert http $HOME_NET any -> $EXTERNAL_NET any (msg:"SSA REST-7 unsupported media type on API endpoint"; flow:established,to_server; http.uri; content:"/api/"; http.content_type; content:"text/xml"; http.content_type; content:"application/x-java-serialized-object"; classtype:web-application-attack; reference:url,ssa.local/controls/REST-7; sid:3001010; rev:1;)
+
+alert http $HOME_NET any -> $EXTERNAL_NET any (msg:"SSA CSRF-1 state-changing request without CSRF token"; flow:established,to_server; http.method; content:"POST|DELETE|PUT|PATCH"; http.cookie; content:"session="; http.request_body; content:"csrf_token|__RequestVerificationToken|authenticity_token"; nocase; threshold:type limit, track by_src, count 1, seconds 300; classtype:web-application-attack; reference:url,ssa.local/controls/CSRF-1; sid:3001011; rev:1;)
+
+alert http $EXTERNAL_NET any -> $HOME_NET any (msg:"SSA SESSION-4 session cookie issued without Secure attribute"; flow:established,to_server; http.set_cookie; content:"session="; http.set_cookie; content:"Secure"; http.set_cookie; content:"HttpOnly"; threshold:type limit, track by_src, count 5, seconds 60; classtype:policy-violation; reference:url,ssa.local/controls/SESSION-4; sid:3001012; rev:1;)
+
+alert http $HOME_NET any -> $EXTERNAL_NET any (msg:"SSA GQL-2 GraphQL introspection query in production"; flow:established,to_server; http.uri; content:"graphql"; http.request_body; content:"__schema"; http.request_body; content:"__type("; nocase; classtype:web-application-attack; reference:url,ssa.local/controls/GQL-2; sid:3001013; rev:1;)
+
+alert http $HOME_NET any -> $EXTERNAL_NET any (msg:"SSA GQL-4 GraphQL query depth/complexity abuse (alias batching)"; flow:established,to_server; http.uri; content:"graphql"; threshold:type limit, track by_src, count 1, seconds 60; http.request_body; content:"alias"; http.request_body; content:"__typename"; classtype:web-application-attack; reference:url,ssa.local/controls/GQL-4; sid:3001014; rev:1;)

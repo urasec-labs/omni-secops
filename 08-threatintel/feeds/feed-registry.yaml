@@ -1,0 +1,101 @@
+# Sovereign Security Archive - threat feed registry
+# schema: 12-schemas/ioc.schema.json
+# owner:  @cti-maintainer
+# rule:   every feed must declare a reliability, an update cadence and a license.
+
+feeds:
+  - id: FEED-001
+    name: MalwareBazaar
+    kind: malware-hash
+    url: https://bazaar.abuse.ch/export/txt/sha256/recent/
+    format: plain
+    reliability: A
+    cadence: hourly
+    license: public
+    normalisation:
+      observable_type: file
+      hash: sha256
+    notes: High fidelity; hash-only so no false positive risk.
+
+  - id: FEED-002
+    name: URLhaus
+    kind: url
+    url: https://urlhaus.abuse.ch/downloads/csv_recent/
+    format: csv
+    reliability: A
+    cadence: hourly
+    license: public
+    normalisation:
+      observable_type: url
+      strip_utm: true
+    notes: Trim the payload column; never fetch the payload.
+
+  - id: FEED-003
+    name: ThreatFox IOC
+    kind: multi
+    url: https://threatfox.abuse.ch/export/json/recent/
+    format: json
+    reliability: B
+    cadence: 6-hourly
+    license: public
+    normalisation:
+      observable_type: dynamic
+    notes: Contains some low-confidence entries; keep the confidence field.
+
+  - id: FEED-004
+    name: Feodo Tracker (botnet C2)
+    kind: ipv4
+    url: https://feodotracker.abuse.ch/downloads/ipblocklist.txt
+    format: plain
+    reliability: A
+    cadence: 12-hourly
+    license: public
+    normalisation:
+      observable_type: ipv4
+
+  - id: FEED-005
+    name: Emerging Threats Compromised IP
+    kind: ipv4
+    url: https://rules.emergingthreats.net/blockrules/compromised-ips.txt
+    format: plain
+    reliability: C
+    cadence: daily
+    license: CC-BY-SA-3.0
+    normalisation:
+      observable_type: ipv4
+    notes: Shared infrastructure causes false positives - score, do not block.
+
+  - id: FEED-006
+    name: OpenPhish
+    kind: url
+    url: https://openphish.com/feed.txt
+    format: plain
+    reliability: B
+    cadence: daily
+    licence_note: free feed, commercial use restricted
+    normalisation:
+      observable_type: url
+
+  - id: FEED-007
+    name: CERT Polska Feeds
+    kind: multi
+    url: https://cert.pl/hostname/white_list.txt
+    format: plain
+    reliability: B
+    cadence: daily
+    license: public
+    normalisation:
+      observable_type: hostname
+    notes: Warnlist of malicious hostnames.
+
+  - id: FEED-008
+    name: Internal SOC enrichment
+    kind: multi
+    url: internal://cti/enriched
+    format: stix
+    reliability: A
+    cadence: on-demand
+    license: internal
+    normalisation:
+      observable_type: dynamic
+    notes: Derived from internal detections; feeds 10-crosswalk/control-detection.

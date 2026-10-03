@@ -1,0 +1,12 @@
+# Sovereign Security Archive - reconnaissance and scanning detections
+# sid range 3001400-3001599
+
+alert tcp $EXTERNAL_NET any -> $HOME_NET any (msg:"SSA PB-NET-ENUM SYN sweep - more than 20 distinct destination ports in 60s"; flags:S; threshold:type both, track by_src, count 20, seconds 60; classtype:network-scan; sid:3001401; rev:1;)
+
+alert tcp $EXTERNAL_NET any -> $HOME_NET any (msg:"SSA PB-NET-ENUM sequential port probe 1-1024"; flags:S; flow:stateless; tcp.window_size:1024; threshold:type limit, track by_src, count 1, seconds 60; classtype:network-scan; sid:3001402; rev:1;)
+
+alert dns $HOME_NET any -> $EXTERNAL_NET any (msg:"SSA 03-wordlists subdomain bruteforce burst"; dns.query; threshold:type limit, track by_src, count 500, seconds 60; classtype:network-scan; sid:3001403; rev:1;)
+
+alert http $HOME_NET any -> $EXTERNAL_NET any (msg:"SSA PB-NET-ENUM directory brute force burst"; flow:established,to_server; threshold:type limit, track by_src, count 500, seconds 60; classtype:web-application-attack; sid:3001404; rev:1;)
+
+alert tcp $HOME_NET any -> $EXTERNAL_NET any (msg:"SSA PB-NET-PIVOT unusual high port outbound connection"; flow:established,to_client; tcp.dest_port:>1024; classtype:bad-unknown; sid:3001405; rev:1;)

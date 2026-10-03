@@ -1,0 +1,15 @@
+* text=auto eol=lf
+
+*.ps1  text eol=crlf
+*.bat  text eol=crlf
+*.cmd  text eol=crlf
+
+*.txt  -text -diff
+*.hexpat text
+*.rules text
+*.yml  text diff=yaml
+*.json text diff=json
+*.csv  text diff=csv
+
+02-payloads/** linguist-generated=true
+03-wordlists/** linguist-generated=true -diff

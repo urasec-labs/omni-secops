@@ -1,0 +1,18 @@
+evasion_id,technique_id,host_sigma,host_wazuh_rule,network_suricata_sid,audit_source,confidence,notes
+EV-LNX-0001,T1218.003,ssa_linux_find_exec.yml,86690,,auditd execve,high,Direct execve on /usr/bin/find by non-root is rare outside tooling
+EV-LNX-0002,T1218.003,ssa_linux_editor_shell.yml,86691,,auditd execve,high,vi/vim/less spawning a shell
+EV-LNX-0005,T1059.006,ssa_interpreter_shell.yml,86694,,auditd execve,medium,Interpreters are common - require no-login-session or tty pairing
+EV-LNX-0007,T1548.003,ssa_linux_sudo_nonshell.yml,86695,,auth.log,medium,Only high when sudo runs without a tty outside automation
+EV-LNX-0008,T1548.003,ssa_linux_suid_shell_copy.yml,86696,,auditd chmod,high,setuid on an interpreter is always suspicious
+EV-LNX-0016,T1053.003,ssa_linux_cron_persistence.yml,86702,3001201,auditd,high,
+EV-LNX-0017,T1610,ssa_linux_nsenter.yml,86703,,auditd execve,high,nsenter into PID 1
+EV-WIN-0001,T1021.002,ssa_windows_psexec.yml,4672,3001301,sysmon,high,Sysmon 1 with psexec service name
+EV-WIN-0003,T1053.005,ssa_windows_schtasks.yml,4698,3001302,sysmon,high,
+EV-WIN-0005,T1105,ssa_windows_certutil.yml,4698,3001304,sysmon,high,Network connection by certutil within 60s
+EV-WIN-0006,T1218.010,ssa_windows_regsvr32.yml,4698,3001305,sysmon,high,scrobj.dll argument
+EV-WIN-0007,T1218.005,ssa_windows_mshta.yml,4698,3001306,sysmon,high,
+EV-WIN-0009,T1059.001,ssa_windows_msbuild_inline.yml,4698,3001308,sysmon,high,InlineTask on the command line
+EV-WIN-0010,T1218.003,ssa_windows_clmxransom.yml,4698,,sysmon,medium,Low prevalence - high fidelity
+EV-WIN-0013,T1047,ssa_windows_wmi_exec.yml,4672,,sysmon,high,Remote WMI process creation
+EV-CTR-0001,T1610,ssa_docker_privileged_run.yml,86703,,docker events,high,privileged or host namespace mount
+EV-CI-0001,T1195.002,ssa_jenkins_groovy_console.yml,4672,3001401,reverse proxy,medium,Script Console POST from an admin UI is also legitimate

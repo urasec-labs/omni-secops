@@ -1,0 +1,4 @@
+alert tcp $HOME_NET any -> $EXTERNAL_NET any (msg:"SSA generated sid 3001301"; sid:3001301; rev:1;)
+alert tcp $HOME_NET any -> $EXTERNAL_NET any (msg:"SSA generated sid 3001302"; sid:3001302; rev:1;)
+alert tcp $HOME_NET any -> $EXTERNAL_NET any (msg:"SSA generated sid 3001308"; sid:3001308; rev:1;)
+alert tcp $HOME_NET any -> $EXTERNAL_NET any (msg:"SSA generated sid 3001309"; sid:3001309; rev:1;)

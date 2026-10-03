@@ -1,0 +1,88 @@
+<!--
+  Sovereign Security Archive - hardened Wazuh agent profile: Linux server
+  Deploy to /var/ossec/etc/ossec.conf on the target. Merge, do not overwrite.
+-->
+<ossec_config>
+
+  <client_buffer>
+    <disabled>no</disabled>
+    <queue_size>10000</queue_size>
+    <events_per_second>500</events_per_second>
+  </client_buffer>
+
+  <auth>
+    <disabled>no</disabled>
+    <port>1514</port>
+    <use_source_ip>yes</use_source_ip>
+    <force_insert>yes</force_insert>
+    <purge>yes</purge>
+  </auth>
+
+  <localfile>
+    <log_format>syslog</log_format>
+    <location>/var/log/auth.log</location>
+  </localfile>
+
+  <localfile>
+    <log_format>syslog</log_format>
+    <location>/var/log/secure</location>
+  </localfile>
+
+  <localfile>
+    <log_format>syslog</log_format>
+    <location>/var/log/wtmp</location>
+  </localfile>
+
+  <localfile>
+    <log_format>command</log_format>
+    <location>/var/log/audit/audit.log</location>
+    <command>cat</command>
+  </localfile>
+
+  <!-- execve audit rules required for 06-defense/wazuh/rules/ssa-linux.rules -->
+  <localfile>
+    <log_format>full_command</log_format>
+    <location>/var/log/audit/audit.log</location>
+    <command>cat</command>
+  </localfile>
+
+  <syscheck>
+    <disabled>no</disabled>
+    <frequency>43200</frequency>
+    <scan_on_start>yes</scan_on_start>
+
+    <!-- persistence surfaces from 04-evasion/linux/persistence.md -->
+    <directories check_all="yes" realtime="yes">/etc</directories>
+    <directories check_all="yes" realtime="yes">/usr/bin</directories>
+    <directories check_all="yes" realtime="yes">/usr/sbin</directories>
+    <directories check_all="no" realtime="yes">/root/.ssh</directories>
+    <directories check_all="no" realtime="yes">/home</directories>
+
+    <ignore>/etc/mtab</ignore>
+    <ignore>/etc/hosts.deny</ignore>
+    <ignore>/etc/mnttab</ignore>
+    <ignore>/etc/exports</ignore>
+    <ignore>/etc/apt/sources.list</ignore>
+  </syscheck>
+
+  <rootcheck>
+    <disabled>no</disabled>
+    <check_dev>yes</check_dev>
+    <check_files>yes</check_files>
+    <check_trojans>yes</check_trojans>
+    <check_dev_points>/etc/mtab</etc/dev/</check_dev_points>
+    <check_files_points>/bin /sbin /usr/bin /usr/sbin</check_files_points>
+  </rootcheck>
+
+  <wodle name="syscollector">
+    <disabled>no</disabled>
+    <interval>1h</interval>
+    <scan_all>yes</scan_all>
+    <hardware>yes</hardware>
+    <network>yes</network>
+    <packages>yes</packages>
+    <ports all="no">yes</ports>
+    <process>yes</process>
+  </wodle>
+
+</ossec_config>

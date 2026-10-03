@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ssa.local/schemas/detection.schema.json",
+  "title": "SSA detection record",
+  "description": "Vendor-neutral description of one detection, used by the crosswalk validators and the coverage report.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["detection_id", "kind", "layer", "severity", "confidence", "maps_to"],
+  "properties": {
+    "detection_id": { "type": "string", "pattern": "^(ssa_[a-z0-9_]+|[0-9]{6,7})$" },
+    "kind":   { "enum": ["suricata", "wazuh", "sigma", "cloudtrail", "kubernetes", "proxy", "edr"] },
+    "layer":  { "enum": ["network", "host", "audit", "application", "cloud"] },
+    "title":  { "type": "string" },
+    "severity": { "enum": ["critical", "high", "medium", "low", "info"] },
+    "confidence": { "enum": ["high", "medium", "low"] },
+    "maps_to": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "At least one crosswalk target is required.",
+      "properties": {
+        "control_id":   { "type": "array", "items": { "type": "string" } },
+        "evasion_id":   { "type": "array", "items": { "type": "string" } },
+        "technique_id": { "type": "array", "items": { "type": "string" } },
+        "cwe_id":       { "type": "array", "items": { "type": "string" } },
+        "payload_id":   { "type": "array", "items": { "type": "string" } }
+      },
+      "minProperties": 1
+    },
+    "falsepositives": { "type": "array", "items": { "type": "string" } },
+    "emulation": { "type": "string" },
+    "reviewed":  { "type": "string" },
+    "residual_gap": { "type": "string" }
+  }
+}

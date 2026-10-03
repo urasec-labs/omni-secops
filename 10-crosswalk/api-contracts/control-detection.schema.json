@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ssa.local/schemas/control-detection.schema.json",
+  "title": "SSA crosswalk row - control to detection",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["control_id", "anchor_layer", "anchor_kind", "confidence"],
+  "properties": {
+    "control_id":  { "type": "string", "pattern": "^[A-Z][A-Z0-9_]*-[0-9]+$" },
+    "sheet":       { "type": "string" },
+    "severity":    { "enum": ["critical", "high", "medium", "low", "info"] },
+    "cwe_id":      { "type": "string", "pattern": "^CWE-[0-9]+$" },
+    "anchor_layer":{ "enum": ["network", "host", "audit", "application"] },
+    "anchor_kind": { "enum": ["suricata", "wazuh", "sigma"] },
+    "suricata_sid":{ "type": ["integer", "null"], "minimum": 3001000, "maximum": 3001999 },
+    "wazuh_rule":  { "type": ["string", "null"], "pattern": "^[0-9]{5,7}$" },
+    "sigma_rule":  { "type": ["string", "null"], "pattern": "^[a-z0-9_]+\\.yml$" },
+    "suricata_file": { "type": ["string", "null"] },
+    "wazuh_file":  { "type": ["string", "null"] },
+    "confidence":  { "enum": ["high", "medium", "low"] },
+    "residual_gap":{ "type": "string" },
+    "reviewed":    { "type": "string", "format": "date" }
+  },
+  "allOf": [
+    {
+      "$comment": "Exactly one anchor identifier must be present.",
+      "anyOf": [
+        { "required": ["suricata_sid"], "properties": { "suricata_sid": { "type": "integer" } } },
+        { "required": ["wazuh_rule"],  "properties": { "wazuh_rule":  { "type": "string" } } },
+        { "required": ["sigma_rule"],  "properties": { "sigma_rule":  { "type": "string" } } }
+      ]
+    },
+    {
+      "$comment": "The anchor_kind must match the identifier that is present.",
+      "allOf": [
+        { "if": { "properties": { "anchor_kind": { "const": "suricata" } } },
+          "then": { "required": ["suricata_sid"] } },
+        { "if": { "properties": { "anchor_kind": { "const": "wazuh" } } },
+          "then": { "required": ["wazuh_rule"] } },
+        { "if": { "properties": { "anchor_kind": { "const": "sigma" } } },
+          "then": { "required": ["sigma_rule"] } }
+      ]
+    }
+  ]
+}

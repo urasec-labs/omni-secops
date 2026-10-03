@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ssactl"
+version = "1.0.0"
+description = "Control plane for the Sovereign Security Archive"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [{ name = "Sovereign Security Archive Contributors" }]
+keywords = ["security", "archive", "scaffolding", "pentest", "soc"]
+dependencies = []
+
+[project.scripts]
+ssactl = "tools.ssactl.cli:main"
+
+[project.urls]
+Homepage = "https://example.invalid/ssa"
+
+[tool.setuptools]
+packages = ["tools", "tools.ssactl"]
+
+[tool.ssactl]
+schema_dir = "12-schemas"
+index_db = "03-wordlists/index/wordlist.db"
+crosswalk_dir = "10-crosswalk"
+strict = true

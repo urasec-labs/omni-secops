@@ -1,0 +1,13 @@
+# ssti
+
+Server-side template injection engines and probes.
+
+## Upstream sources
+
+| Source | Owner | License | Landed here as |
+|---|---|---|---|
+| PayloadsAllTheThings | swisskyrepo | MIT | `02-payloads` |
+
+## Ownership
+
+See `CODEOWNERS` at the archive root.

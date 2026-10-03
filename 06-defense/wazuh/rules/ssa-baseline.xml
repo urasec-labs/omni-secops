@@ -1,0 +1,94 @@
+<!--
+  Sovereign Security Archive - Wazuh baseline ruleset
+  Manager-side rules. Merge into ossec.conf <ossec_config><rules> section or
+  deploy with: curl -sS $MANAGER/api/agent-groups/1/configuration/upload
+  Target rule ids: 100000-100999 are SSA-owned.
+  Mapping: 10-crosswalk/control-detection/control-detection.csv
+-->
+<group name="ssa,baseline,">
+
+  <group name="ssa,auth,">
+    <!-- 100010 - AUTH-4 / AUTH-7: authentication failures (generic, any host) -->
+    <rule id="100010" level="5">
+      <if_sid>5712,5713,5716</if_sid>
+      <match>authentication failure</match>
+      <description>SSA AUTH-4: authentication failure detected.</description>
+      <mitigation>Enable rate limiting and lockout per OWASP AUTH-4.</mitigation>
+    </rule>
+
+    <!-- 100011 - AUTH-4: password spraying (many users, few failures each) -->
+    <rule id="100011" level="12">
+      <if_matched_sid>100010</if_matched_sid>
+      <frequency>20</frequency>
+      <timeframe>300</timeframe>
+      <same_user>?</same_user>
+      <same_src_ip>yes</same_src_ip>
+      <description>SSA AUTH-4: password spraying from a single source.</description>
+      <group>authentication_failures,</group>
+      <mitigation>Apply OWASP AUTH-4 progressive backoff; verify MFA coverage.</mitigation>
+    </rule>
+
+    <!-- 100012 - AUTH-7: successful logon after a failure burst -->
+    <rule id="100012" level="12">
+      <if_matched_sid>5710,5716</if_matched_sid>
+      <frequency>5</frequency>
+      <timeframe>300</timeframe>
+      <same_user>yes</same_user>
+      <description>SSA AUTH-7: successful logon after repeated failures.</description>
+      <group>authentication_failures,</group>
+    </rule>
+  </group>
+
+  <group name="ssa,web,">
+    <!-- 100020 - INJ-1: SQLi keyword in web access log -->
+    <rule id="100020" level="10">
+      <if_sid>31151</if_sid>
+      <regex>(\bunion\b.{0,40}\bselect\b)|\b(or|and)\b.{0,10}=.{0,10}|\bsleep\s*\(|\bwaitfor\s+delay\b|\bxp_cmdshell\b)</regex>
+      <nocase>true</nocase>
+      <description>SSA INJ-1: SQL injection indicator in web request.</description>
+      <mitigation>Parameterised queries (OWASP INJ-1).</mitigation>
+    </rule>
+
+    <!-- 100021 - DOM-1: XSS indicator in web access log -->
+    <rule id="100021" level="8">
+      <if_sid>31151</if_sid>
+      <regex>(&lt;script|%3cscript|onerror\s*=|javascript:|\bonload\s*=|\bsvg/onload)</regex>
+      <nocase>true</nocase>
+      <description>SSA DOM-1: XSS indicator in web request.</description>
+    </rule>
+
+    <!-- 100022 - INPUT-8: SSRF / metadata access from application server -->
+    <rule id="100022" level="12">
+      <if_sid>31151</if_sid>
+      <regex>(169\.254\.169\.254|metadata\.google\.internal|100\.100\.100\.200|file:///etc/passwd)</regex>
+      <description>SSA INPUT-8: outbound request to a link-local metadata endpoint.</description>
+      <mitigation>Egress filtering and destination allow-list (OWASP INPUT-8).</mitigation>
+    </rule>
+  </group>
+
+  <group name="ssa,integrity,">
+    <!-- 100030 - UPL-2: executable file written into a served path -->
+    <rule id="100030" level="12">
+      <if_sid>550,554,5712</if_sid>
+      <match>\.(php|phtml|jsp|asp|aspx|exe|scr|cgi)$</match>
+      <description>SSA UPL-2: executable artefact created under a web-served path.</description>
+      <group>webserver_log,</group>
+    </rule>
+
+    <!-- 100031 - CRYPTO-1: private key material written in world-readable path -->
+    <rule id="100031" level="10">
+      <if_sid>550</if_sid>
+      <match>.pem|id_rsa|id_ed25519|.ppk</match>
+      <description>SSA CRYPTO-1: private key material present on a monitored host.</description>
+    </rule>
+
+    <!-- 100032 - LOG-7: CRLF in a logged field (log injection) -->
+    <rule id="100032" level="7">
+      <if_sid>31151</if_sid>
+      <regex>%0d%0a|%0a|%0d</regex>
+      <nocase>true</nocase>
+      <description>SSA LOG-7: CR/LF in a logged field - log injection attempt.</description>
+    </rule>
+  </group>
+
+</group>

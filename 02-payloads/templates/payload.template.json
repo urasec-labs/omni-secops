@@ -1,0 +1,23 @@
+{
+  "$schema": "../../12-schemas/payload.schema.json",
+  "payload_id": "PL-<DOMAIN>-<NNNN>",
+  "cwe_id": "CWE-00",
+  "context": "query|identifier|numeric|header|cookie|url|xml|template|command|file|ipc|deeplink|ldap|nosql|jndi|rce|network|other",
+  "surface": "body|parameter|header|cookie|url|path|stdin|argument|file|uri|ipc|intent-extra|backup|activity|certificate|jndi",
+  "engine": "generic|mysql|postgresql|mssql|oracle|sqlite|php|jinja2|twig|freemarker|velocity|erb|handlebars|el|log4j|aws|gcp|azure|k8s|android|ios|bash|python3|cron|ssh|sudo|find|http|smtp|mongodb|openldap|graphql|none",
+  "payload": "THE PAYLOAD ITSELF",
+  "severity": "critical|high|medium|low|info",
+  "classification": "T0|T1|T2",
+  "tags": ["tag-a", "tag-b"],
+  "notes": "Why this works, prerequisites, safe alternative",
+  "provenance": {
+    "source": "PAT",
+    "ref": "master@2026-01-15"
+  },
+  "crosswalk": {
+    "fuzz_wordlist": "03-wordlists/web/fuzzing/<file>.txt",
+    "detections": ["3001001", "86610"],
+    "playbook": "01-intel/playbooks/web/sql-injection.md",
+    "module": "05-engines/sqlmap"
+  }
+}

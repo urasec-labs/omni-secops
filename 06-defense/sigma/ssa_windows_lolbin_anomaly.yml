@@ -1,0 +1,63 @@
+title: Signed LOLBin spawned a shell or scripting host
+id: 9a2f5c31-6e44-4f8a-bc02-3d5b7e9a1c05
+status: test
+description: Detects the parent/child pattern of trusted signed binaries used to execute attacker code.
+author: Sovereign Security Archive
+date: 2026-01-15
+references:
+  - 04-evasion/windows/sushi.md
+  - 04-evasion/windows/binaries.csv
+logsource:
+  product: windows
+  category: process_creation
+detection:
+  parent:
+    ParentImage|endswith:
+      - '\certutil.exe'
+      - '\mshta.exe'
+      - '\regsvr32.exe'
+      - '\installutil.exe'
+      - '\msbuild.exe'
+      - '\cmstp.exe'
+      - '\rundll32.exe'
+      - '\wmic.exe'
+      - '\forfiles.exe'
+      - '\hh.exe'
+      - '\CLMXRANSOM.exe'
+      - '\odbcconf.exe'
+      - '\control.exe'
+      - '\eventvwr.exe'
+      - '\mmc.exe'
+      - '\pcalua.exe'
+  child:
+    ChildImage|endswith:
+      - '\cmd.exe'
+      - '\powershell.exe'
+      - '\pwsh.exe'
+      - '\wscript.exe'
+      - '\cscript.exe'
+      - '\mshta.exe'
+      - '\rundll32.exe'
+      - '\regsvr32.exe'
+      - '\curl.exe'
+  filter_known_automation:
+    User|startswith:
+      - 'svc_'
+      - 'SYSTEM'
+  condition: parent and child and not 1 of filter_known_automation
+fields:
+  - ParentImage
+  - ParentCommandLine
+  - Image
+  - CommandLine
+  - User
+  - ParentUser
+falsepositives:
+  - Software installers and updaters
+  - Management tools that invoke certutil to verify catalog signatures
+  - Legacy VB/COM applications
+level: high
+tags:
+  - attack.defense_evasion
+  - attack.taint_tools
+  - attack.execution

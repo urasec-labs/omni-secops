@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ssa.local/schemas/wordlist-entry.schema.json",
+  "title": "SSA wordlist entry (JSON representation of a .txt line)",
+  "description": "Wordlists on disk are plain text; this schema governs the JSON form used by the index and the feed mechanism.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["token", "surface"],
+  "properties": {
+    "token": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[^\\u0000-\\u001f\\u007f]+$",
+      "description": "No control characters. Prevents log injection and index poisoning (threat model S6)."
+    },
+    "surface": {
+      "enum": ["parameter", "header", "cookie", "url", "path", "body",
+               "username", "password", "host", "cidr"]
+    },
+    "cwe_id":    { "type": "string", "pattern": "^CWE-[0-9]+$" },
+    "context":   { "type": "string" },
+    "source":    { "type": "string", "description": "SECLISTS or internal" },
+    "provenance": { "type": "string" },
+    "weight":    { "type": "number", "minimum": 0, "maximum": 1 }
+  },
+  "$comment": "Control characters are forbidden on purpose - see 00-governance/threat-model.md S6."
+}

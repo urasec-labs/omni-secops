@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ssa.local/schemas/evasion.schema.json",
+  "title": "SSA evasion primitive",
+  "description": "A GTFOBins-style abuse of a trusted binary, promoted to a stable EV-* identifier and required to carry at least one detection anchor.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["evasion_id", "platform", "binary", "technique_id", "primitive", "provenance"],
+  "properties": {
+    "evasion_id":   { "type": "string", "pattern": "^EV-(LNX|WIN|MAC|CTR|CI)-[0-9]{4}$" },
+    "platform":     { "enum": ["linux", "windows", "macos", "containers", "ci", "other"] },
+    "binary":       { "type": "string", "minLength": 1, "maxLength": 128 },
+    "technique_id": { "type": "string", "pattern": "^T[0-9]{4}(\\.[0-9]{3})?$" },
+    "cwe_id":       { "type": "string", "pattern": "^CWE-[0-9]+$" },
+    "primitive":    { "type": "string", "minLength": 1, "maxLength": 512 },
+    "triage_cost":  { "enum": ["low", "medium", "high"] },
+    "mitre":        { "type": "array", "items": { "type": "string" } },
+    "runbook":      { "type": "string" },
+    "module":       { "type": "string" },
+    "host_rule":    { "type": "string" },
+    "network_rule": { "type": "string" },
+    "sigma":        { "type": "string" },
+    "provenance":   { "type": "string" },
+    "notes":        { "type": "string" }
+  },
+  "$comment": "host_rule, network_rule or sigma must be present - enforced by ssactl verify --coverage."
+}

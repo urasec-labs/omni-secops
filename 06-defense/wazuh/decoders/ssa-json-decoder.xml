@@ -1,0 +1,12 @@
+<!--
+  Sovereign Security Archive - Wazuh decoders
+  Unpacks JSON audit events from the archive's own automation services and from
+  kubernetes audit logs into flat key=value pairs so rules can match on them.
+-->
+<decoder name="SSA-K8S-AUDIT">
+  <prematch>^.*"kind":"Event".*$</prematch>
+</decoder>
+
+<decoder name="SSA-SEC-AGENT">
+  <prematch>^SSA-AGENT\s|^\{\"agent\":</prematch>
+</decoder>

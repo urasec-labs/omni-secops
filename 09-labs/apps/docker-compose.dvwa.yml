@@ -1,0 +1,97 @@
+# Sovereign Security Archive - deliberately vulnerable lab estate
+# WARNING: this stack is intentionally exploitable. Host-only networking only.
+# provenance: 09-labs/apps (Awesome Hacking tool index) + OWASP-CS controls
+
+name: ssa-lab
+
+services:
+
+  dvwa:
+    image: vulnerables/web-dvwa:latest
+    container_name: ssa-dvwa
+    networks: [labnet]
+    ports:
+      - "127.0.0.1:8080:80"      # loopback bind only
+    environment:
+      DB_SERVER: dvwa-db
+    labels:
+      ssa.role: "web-target"
+      ssa.playbook: "01-intel/playbooks/web/sql-injection.md"
+      ssa.expected_rules: "3001001,3001003,3001006"
+
+  dvwa-db:
+    image: docker.io/library/mariadb:11
+    container_name: ssa-dvwa-db
+    networks: [labnet]
+    environment:
+      MARIADB_DATABASE: dvwa
+      MARIADB_USER: dvwa
+      MARIADB_PASSWORD: lab-only-not-a-secret
+    labels:
+      ssa.role: "data-tier"
+
+  juice-shop:
+    image: bkimminich/juice-shop:latest
+    container_name: ssa-juice-shop
+    networks: [labnet]
+    ports:
+      - "127.0.0.1:3000:3000"
+    environment:
+      NODE_ENV: "production"
+    labels:
+      ssa.role: "web-target"
+      ssa.playbook: "01-intel/playbooks/web/authentication-bypass.md"
+      ssa.expected_rules: "3001404"
+
+  log4j-demo:
+    image: ghcr.io/christophetd/log4shell-vulnerable-app:latest
+    container_name: ssa-log4j-demo
+    networks: [labnet]
+    ports:
+      - "127.0.0.1:8081:8080"
+    labels:
+      ssa.role: "web-target"
+      ssa.payload: "PL-INFRA-0020"
+      ssa.expected_rules: "3001004"
+
+  suricata-sensor:
+    image: suricata/suricata:7.0.10
+    container_name: ssa-suricata
+    network_mode: host
+    volumes:
+      - ../../06-defense/suricata/rules:/etc/suricata/rules:ro
+      - ../../06-defense/suricata/thresholds:/etc/suricata/thresholds:ro
+      - suricata-logs:/var/log/suricata
+    command: ["-c", "/etc/suricata/suricata.yaml", "--af-packet", "-l", "/var/log/suricata"]
+    labels:
+      ssa.role: "network-sensor"
+
+  wazuh-manager:
+    image: wazuh/wazuh-manager:4.9.0
+    container_name: ssa-wazuh-manager
+    network_mode: host
+    volumes:
+      - ../../06-defense/wazuh:/var/ossec/etc/shared:ro
+      - wazuh-logs:/var/log/wazuh
+    labels:
+      ssa.role: "host-sensor"
+
+  collector:
+    image: python:3.12-slim
+    container_name: ssa-collector
+    network_mode: host
+    volumes:
+      - ../../10-crosswalk:/crosswalk:ro
+      - ../../11-automation:/automation:ro
+    command: ["python", "/automation/scripts/lab_healthcheck.py", "--root", "/crosswalk/../.."]
+    labels:
+      ssa.role: "validator"
+
+networks:
+  labnet:
+    driver: bridge
+    internal: true          # no route to the outside world from the lab
+
+volumes:
+  suricata-logs:
+  wazuh-logs:

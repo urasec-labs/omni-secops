@@ -1,0 +1,14 @@
+{
+  "name": "SSA - layered URL / Base64 / Hex decode",
+  "description": "Applies URL decode, Base64 decode and hex decode in sequence. Use for encoded command lines, obfuscated PowerShell, and Cookie/Authorization header payloads. Repeat the chain manually if the output still contains base64 markers.",
+  "author": "Sovereign Security Archive",
+  "created": "2026-01-15",
+  "notes": "Input: a string or file. Output order matters - URL decode first, then hex, then Base64. Verify each stage manually before trusting the final output.",
+  "operations": [
+    { "op": "To Base64", "args": { "alphabet": "A-Za-z0-9+/=", "removeNonAlphChars": false } },
+    { "op": "URL Decode", "args": {} },
+    { "op": "Decode text (Base64)", "args": { "removeNonAlphChars": false } },
+    { "op": "From Hex", "args": { "space": "none", "ignoreInvalidChar": false } },
+    { "op": "Decode text (Base64)", "args": { "removeNonAlphChars": false } }
+  ]
+}

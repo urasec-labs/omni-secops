@@ -1,0 +1,23 @@
+# Sovereign Security Archive - Suricata rules for evasion / living-off-the-land
+# sid range 3001200-3001399 reserved for SSA evasion detections
+# mapping: 10-crosswalk/evasion-detection/evasion-to-detection.csv
+
+# EV-LNX-0016 cron persistence outbound fetch
+alert http $HOME_NET any -> $EXTERNAL_NET any (msg:"SSA EV-LNX-0016 periodic outbound fetch from cron-like beacon"; flow:established,to_server; http.host; content:"CRONBEACON"; nocase; http.uri; content:"/x.sh"; threshold:type limit, track by_src, count 3, seconds 300; classtype:policy-violation; sid:3001201; rev:1;)
+
+# EV-WIN-0005 certutil download
+alert http $HOME_NET any -> $EXTERNAL_NET any (msg:"SSA EV-WIN-0005 certutil/bitsadmin payload download"; flow:established,to_server; http.user_agent; content:"certutil"; nocase; http.user_agent; content:"bitsadmin"; nocase; http.uri; content:"-urlcache"; http.uri; content:"/transfer"; http.uri; content:".dll"; http.uri; content:".exe"; classtype:policy-violation; sid:3001202; rev:1;)
+
+# EV-WIN-0006/0007/0012 LOLBin remote content
+alert http $HOME_NET any -> $EXTERNAL_NET any (msg:"SSA EV-WIN-0007 mshta remote script fetch"; flow:established,to_server; http.uri; content:".hta"; nocase; http.user_agent; content:"MSHTA"; nocase; classtype:policy-violation; sid:3001203; rev:1;)
+
+alert http $HOME_NET any -> $EXTERNAL_NET any (msg:"SSA EV-WIN-0014 msiexec remote MSI fetch"; flow:established,to_server; http.uri; content:".msi"; nocase; http.user_agent; content:"msiexec"; nocase; classtype:policy-violation; sid:3001204; rev:1;)
+
+# CH-002 DNS tunnelling exfiltration indicator
+alert dns $HOME_NET any -> $EXTERNAL_NET any (msg:"SSA CH-002 possible DNS tunnelling - excessive label length"; dns.query; pcre:"/^[a-z0-9+\/=]{40,}/i"; threshold:type limit, track by_src, count 5, seconds 60; classtype:policy-violation; sid:3001205; rev:1;)
+
+# EV-LNX-0015 ssh reverse tunnel
+alert ssh $EXTERNAL_NET any -> $HOME_NET any (msg:"SSA EV-LNX-0015 interactive SSH session without PTY on internet-facing host"; flow:established,to_server; ssh.proto; content:"2"; threshold:type limit, track by_src, count 1, seconds 300; classtype:policy-violation; sid:3001206; rev:1;)
+
+# HTTP CONNECT tunnel
+alert http $HOME_NET any -> $EXTERNAL_NET any (msg:"SSA PB-NET-PIVOT HTTP CONNECT tunnel to non-TLS port"; flow:established,to_server; http.method; content:"CONNECT"; http.port; content:"|80|"; startswith; classtype:policy-violation; sid:3001207; rev:1;)

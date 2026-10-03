@@ -1,0 +1,42 @@
+control_id,control_name,framework,severity,owner,evidence_required,review_cadence
+INPUT-4,Server-side input validation allow-list,OWASP-CS,high,appsec,unit tests + fuzz run,quarterly
+INPUT-8,URL validation for server-side requests,OWASP-CS,high,appsec,egress policy + test,quarterly
+INJ-1,Parameterised queries,OWASP-CS,critical,appsec,code review + SAST,quarterly
+INJ-2,Least privilege database accounts,OWASP-CS,high,dba,grant inventory,quarterly
+DOM-1,Context-aware output encoding,OWASP-CS,high,appsec,SAST + DAST,quarterly
+DOM-4,Content Security Policy,OWASP-CS,high,appsec,response header check,monthly
+CSRF-1,Anti-CSRF tokens,OWASP-CS,critical,appsec,integration test,quarterly
+CSRF-2,SameSite cookies,OWASP-CS,critical,appsec,response header check,monthly
+AUTH-1,Multi-factor authentication,OWASP-CS,critical,iam,IdP config export,monthly
+AUTH-4,Rate limiting and lockout,OWASP-CS,high,appsec,load test + alerts,quarterly
+AUTH-7,Generic authentication errors,OWASP-CS,high,appsec,response comparison,quarterly
+SESSION-3,Session rotation after privilege change,OWASP-CS,high,appsec,integration test,quarterly
+SESSION-4,Secure HttpOnly SameSite cookies,OWASP-CS,high,appsec,response header check,monthly
+AUTHZ-2,Deny by default,OWASP-CS,critical,appsec,policy test suite,quarterly
+AUTHZ-3,Server-side authorization on data access,OWASP-CS,high,appsec,IDOR test suite,quarterly
+UPL-2,Upload extension allow-list,OWASP-CS,high,appsec,upload test,quarterly
+UPL-5,Uploads outside web root,OWASP-CS,high,platform,nginx/apache config,quarterly
+LOG-4,Log data encoding,OWASP-CS,medium,appsec,log injection test,annual
+LOG-7,Near real-time alerting on security events,OWASP-CS,medium,soc,SOC runbook + rule tests,monthly
+CRYPTO-1,Modern authenticated encryption,OWASP-CS,high,appsec,code review,quarterly
+CRYPTO-4,No ECB / static IV,OWASP-CS,high,appsec,code review,quarterly
+SECRETS-3,Secret rotation,OWASP-CS,high,platform,rotation job logs,monthly
+REST-1,HTTPS only,OWASP-CS,high,platform,listener inventory,monthly
+REST-7,Content-Type validation,OWASP-CS,medium,appsec,negative tests,quarterly
+GQL-2,GraphQL introspection disabled in production,OWASP-CS,medium,appsec,request to /graphql,quarterly
+GQL-4,Query depth and complexity limits,OWASP-CS,high,appsec,complexity test,quarterly
+LLM-01,Untrusted content segregated from instructions,OWASP-CS,critical,ai-platform,prompt injection suite,monthly
+LLM-02,Model output validated before use,OWASP-CS,high,ai-platform,output schema enforcement,monthly
+LLM-05,Least privilege for model tools,OWASP-CS,high,ai-platform,tool permission list,monthly
+CLOUD-01,IMDSv2 required / metadata endpoint protected,OWASP-CS,critical,cloudops,instance metadata config,monthly
+CLOUD-02,Egress default deny for application subnets,OWASP-CS,high,network,route tables,monthly
+CLOUD-03,Workload identity instead of static keys,OWASP-CS,high,cloudops,kubernetes service accounts,quarterly
+AD-01,AS-REP roast hardening (preauth required),MITRE,high,adops,Get-ADUser report,quarterly
+AD-02,AES-only Kerberos encryption,MITRE,high,adops,domain controller policy,quarterly
+AD-03,SMB signing mandatory,MITRE,critical,adops,smb signing policy,quarterly
+AD-04,DCSync monitored off-domain,MITRE,critical,soc,4662 collection proof,monthly
+AD-05,Tiered administration,MITRE,high,adops,admin group inventory,quarterly
+AD-06,Privileged MFA / PAW,MITRE,high,adops,Conditional Access policy,quarterly
+IR-01,Documented IR playbook with named roles,OWASP-CS,medium,soc,playbook + tabletop record,annual
+IR-02,Evidence handling with chain of custody,OWASP-CS,medium,soc,evidence register,annual
+IR-03,Quarterly tabletop exercise,OWASP-CS,medium,soc,after-action report,quarterly

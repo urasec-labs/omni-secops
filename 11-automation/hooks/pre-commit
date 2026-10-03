@@ -1,0 +1,56 @@
+#!/bin/sh
+# Sovereign Security Archive pre-commit hook
+# Install:  git config core.hooksPath 11-automation/hooks
+#          (or copy this file to .git/hooks/pre-commit and chmod +x)
+
+set -e
+
+fail() {
+    echo ""
+    echo "PRE-COMMIT BLOCKED: $1"
+    echo "  fix the issue above, or: git commit --no-verify (document why)"
+    echo ""
+    exit 1
+}
+
+changed=$(git diff --cached --name-only)
+
+# 1. no secrets, no private keys, no real credentials
+if echo "$changed" | grep -Eq '\.(pem|key|p12|pfx|asc|ovpn|jks)$'; then
+    echo "BLOCK: private key material staged"
+    fail "key material must never be committed (see SECURITY.md)"
+fi
+
+if git diff --cached | grep -Eiq '(AKIA[0-9A-Z]{16}|BEGIN (RSA |EC |OPENSSH )?PRIVATE KEY|xox[baprs]-[0-9A-Za-z-]{10,})'; then
+    echo "BLOCK: credential-shaped string detected in the diff"
+    fail "remove the credential and rotate it"
+fi
+
+# 2. payload / ioc / rule artefacts must stay schema valid
+if echo "$changed" | grep -qE '^(02-payloads|08-threatintel)/.*\.json$'; then
+    python tools/ssactl.py validate --root . >/dev/null || fail "schema validation failed"
+    echo "  ok  schema validation"
+fi
+
+# 3. crosswalk edits must not break reference integrity
+if echo "$changed" | grep -q '^10-crosswalk/'; then
+    python tools/ssactl.py verify --root . --strict >/dev/null || fail "crosswalk integrity failed"
+    echo "  ok  crosswalk integrity"
+fi
+
+# 4. index freshness when corpora change
+if echo "$changed" | grep -qE '^(02-payloads|03-wordlists)/'; then
+    python tools/ssactl.py index --root . --check >/dev/null 2>&1 || \
+        python tools/ssactl.py index --root . >/dev/null
+    echo "  ok  index rebuilt"
+fi
+
+# 5. line endings and trailing whitespace hygiene
+if git diff --cached --check >/dev/null 2>&1; then
+    echo "  ok  whitespace hygiene"
+else
+    echo "WARN  trailing whitespace or CRLF issues in staged files"
+fi
+
+echo "pre-commit: all SSA checks passed"
+exit 0

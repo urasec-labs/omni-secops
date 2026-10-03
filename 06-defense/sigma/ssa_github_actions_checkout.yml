@@ -1,0 +1,15 @@
+title: github actions checkout
+id: ssa_ssa_github_actions_checkout
+status: experimental
+description: Auto-tracked detection for github actions checkout under the Sovereign Security Archive crosswalk.
+author: Sovereign Security Archive
+date: 2026-01-15
+logsource:
+  product: windows
+  category: process_creation
+detection:
+  selection:
+    CommandLine|contains: 'github_actions_checkout'
+  condition: selection
+level: high
+tags: [attack.defense_evasion]

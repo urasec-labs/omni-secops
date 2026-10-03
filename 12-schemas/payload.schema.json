@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ssa.local/schemas/payload.schema.json",
+  "title": "SSA payload record",
+  "description": "One offensive payload with enough metadata to be selected by context and to be mapped to detections.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["payload_id", "cwe_id", "context", "surface", "payload", "severity", "classification", "provenance"],
+  "properties": {
+    "payload_id": {
+      "type": "string",
+      "pattern": "^PL-[A-Z0-9-]+-[0-9]{4}$",
+      "description": "Stable identifier, never reused."
+    },
+    "cwe_id":   { "type": "string", "pattern": "^CWE-[0-9]+$" },
+    "context":  { "type": "string" },
+    "surface":  { "type": "string" },
+    "engine":  { "type": "string" },
+    "payload": { "type": "string", "minLength": 1, "maxLength": 4096 },
+    "severity": { "enum": ["critical", "high", "medium", "low", "info"] },
+    "classification": { "enum": ["T0", "T1", "T2"] },
+    "tags":    { "type": "array", "items": { "type": "string" }, "maxItems": 32, "uniqueItems": true },
+    "notes":   { "type": "string", "maxLength": 2000 },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source", "ref"],
+      "properties": {
+        "source":   { "type": "string", "description": "key from the lock file, e.g. PAT" },
+        "ref":      { "type": "string", "description": "pinned upstream ref, e.g. master@2026-01-15" },
+        "secondary": { "type": "string" },
+        "derived_from": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "crosswalk": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "fuzz_wordlist": { "type": "string" },
+        "detections": { "type": "array", "items": { "type": "string" } },
+        "playbook":     { "type": "string" },
+        "module":       { "type": "string" }
+      }
+    }
+  },
+  "$comment": "The (cwe_id, context, surface, engine, normalised payload) tuple is the index join key. The unique index lives in 03-wordlists/index/schema.sql."
+}

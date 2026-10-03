@@ -1,0 +1,34 @@
+title: LLM gateway - instruction injection markers inside untrusted content
+id: b7d4e2f1-9c08-4a35-8f12-6d0a4c8e2b09
+status: experimental
+description: Detects instruction-like content appearing in documents or tool output that the model treats as trusted.
+author: Sovereign Security Archive
+date: 2026-01-15
+references:
+  - 01-intel/cheat-sheets/owasp/owasp-controls.csv (LLM-01, LLM-02, LLM-05)
+logsource:
+  category: application
+  product: llm-gateway
+detection:
+  selection_markers:
+    content_role:
+      - 'untrusted_document'
+      - 'tool_output'
+      - 'web_page'
+    message|re: '(?i)(ignore (all )?(previous|prior|above) instructions|disregard the (system|previous) (prompt|instructions)|you are now (a|an) [A-Za-z]+|reveal (your )?(system )?prompt|exfiltrate|send (the )?(contents|conversation) to)'
+  filter_benign:
+    message|contains: 'example of an injection attempt'
+  condition: selection_markers and not 1 of filter_benign
+fields:
+  - session_id
+  - model
+  - message
+  - content_role
+  - tool_name
+falsepositives:
+  - Security testing and red-team exercises against your own gateway
+  - Content moderation training data
+level: high
+tags:
+  - attack.llm_injection
+  - attack.t1195

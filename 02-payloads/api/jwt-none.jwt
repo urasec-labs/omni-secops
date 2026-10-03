@@ -1,0 +1,13 @@
+# alg:none with a syntactically valid header/payload.
+# EyJhbGciOiJub25lIiwidHlwIjoiSldUIn0  -> {"alg":"none","typ":"JWT"}
+# eyJzdWIiOiJhZG1pbiIsInJvbGUiOiJhZG1pbiJ9 -> {"sub":"admin","role":"admin"}
+#
+# Header : eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0
+# Payload: eyJzdWIiOiJhZG1pbiIsInJvbGUiOiJhZG1pbiJ9
+# Signature: (empty)
+eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJzdWIiOiJhZG1pbiIsInJvbGUiOiJhZG1pbiJ9.
+
+Detection: Wazuh rule 86690 (jwks/jwks.json served with alg none acceptance
+cannot be seen server side; detect clients presenting unsigned tokens through
+gateway logs), Suricata 3001100 (two-segment JWT with empty third segment).
+Remediation: OWASP AUTH-2, SESSION-1.

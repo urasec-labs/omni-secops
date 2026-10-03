@@ -1,0 +1,36 @@
+title: Kerberoasting - bulk service ticket requests with RC4 encryption
+id: 8f2a1c44-1d21-4a1e-9a71-0b6d2f5c7e01
+status: experimental
+description: Detects a high volume of TGS requests using RC4-HMAC, characteristic of Kerberoasting.
+author: Sovereign Security Archive
+date: 2026-01-15
+references:
+  - https://attack.mitre.org/techniques/T1558/003/
+  - 01-intel/playbooks/active-directory/kerberos-attacks.md
+  - 10-crosswalk/evasion-detection/evasion-to-detection.csv
+logsource:
+  product: windows
+  service: security
+detection:
+  selection_encryption_type:
+    TicketEncryptionType|re: '0x17|0x18|0x12'
+  selection_event:
+    EventID: 4769
+  filter_service:
+    ServiceName: ''   # exclude machine account requests with no service name
+  condition: selection_encryption_type and selection_event and not 1 of filter_service
+  timeframe: 10m
+  condition_count: 25
+fields:
+  - TargetUserName
+  - ServiceName
+  - TicketEncryptionType
+  - IpAddress
+  - WorkstationName
+falsepositives:
+  - Legitimate service accounts with pre-tickets disabled during password rotation
+  - Monitoring tools that enumerate SPNs
+level: high
+tags:
+  - attack.credential_access
+  - attack.t1558.003

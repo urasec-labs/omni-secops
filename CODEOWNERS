@@ -1,0 +1,39 @@
+# Default owners for every path in the archive.
+# <path>                                    <owner>
+
+*                                   @archive-steward
+
+# Knowledge
+01-intel/playbooks/                 @knowledge-maintainer
+01-intel/methodologies/             @knowledge-maintainer
+01-intel/cheat-sheets/owasp/        @appsec-maintainer
+01-intel/checklists/                @endpoint-maintainer
+
+# Offensive corpora
+02-payloads/                        @offensive-data-maintainer
+03-wordlists/                       @offensive-data-maintainer
+04-evasion/                         @redteam-maintainer
+
+# Engines
+05-engines/metasploit/              @redteam-maintainer
+05-engines/sqlmap/                  @offensive-data-maintainer
+05-engines/osint/                   @cti-maintainer
+
+# Defensive
+06-defense/wazuh/                   @detection-reviewer @endpoint-maintainer
+06-defense/suricata/                @detection-reviewer @network-maintainer
+06-defense/blue-team/               @detection-reviewer
+06-defense/sigma/                   @detection-reviewer
+06-defense/ir/                      @ir-maintainer
+
+# Intelligence
+08-threatintel/                     @cti-maintainer
+
+# Labs
+09-labs/                            @lab-maintainer
+
+# Integration, build, schema - steward only
+10-crosswalk/                       @archive-steward @detection-reviewer
+11-automation/                      @archive-steward
+12-schemas/                         @archive-steward
+tools/                              @archive-steward

@@ -1,0 +1,34 @@
+title: Unexpected access to the cloud instance metadata service
+id: 2f9c3d84-5a17-4f61-8c02-9a3d5e7b1c07
+status: test
+description: Detects non-application requests to the IMDS endpoint, a common SSRF and credential-theft step.
+author: Sovereign Security Archive
+date: 2026-01-15
+references:
+  - 01-intel/playbooks/cloud/aws-iam-privesc.md
+  - 02-payloads/cloud/payloads.json
+logsource:
+  category: proxy
+  product: zeek
+detection:
+  selection:
+    dest_ip|cidr: '169.254.169.254/32'
+  filter_known_agents:
+    UserAgent|contains:
+      - 'AWS_EC2'
+      - 'cloudfront'
+      - 'kube-probe'
+  condition: selection and not 1 of filter_known_agents
+fields:
+  - id.orig_h
+  - user_agent
+  - http.request_uri
+  - dest_ip
+falsepositives:
+  - Instance bootstrap agents
+  - Serverless runtimes legitimately contacting IMDSv2
+level: high
+tags:
+  - attack.credential_access
+  - attack.t1552.005
+  - attack.discovery

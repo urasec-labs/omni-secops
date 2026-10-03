@@ -1,0 +1,31 @@
+title: SSH authorized_keys file modified
+id: 6d4c1f77-3c22-4c53-9d61-3b6b0e0d4a02
+status: test
+description: Modification of authorized_keys creates durable SSH access.
+author: Sovereign Security Archive
+date: 2026-01-15
+references:
+  - https://attack.mitre.org/techniques/T1098/004/
+  - 04-evasion/linux/persistence.md
+logsource:
+  product: linux
+  service: sshd
+detection:
+  selection:
+    TargetFilename|contains: '/.ssh/authorized_keys'
+    EventType: write
+  filter_automation:
+    User|startswith: 'ansible.'
+  condition: selection and not 1 of filter_automation
+fields:
+  - TargetFilename
+  - User
+  - Image
+falsepositives:
+  - Configuration management (must be scoped to the automation account)
+  - Developer workstation key rotation
+level: high
+tags:
+  - attack.persistence
+  - attack.t1098.004
+  - attack.t1552.001

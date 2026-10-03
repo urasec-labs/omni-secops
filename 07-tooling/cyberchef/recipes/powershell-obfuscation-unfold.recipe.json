@@ -1,0 +1,12 @@
+{
+  "name": "SSA - unfold PowerShell -EncodedCommand",
+  "description": "Base64-decodes the argument of -EncodedCommand / -e and outputs UTF-16LE text for manual review.",
+  "author": "Sovereign Security Archive",
+  "created": "2026-01-15",
+  "notes": "powershell.exe -EncodedCommand takes Base64 of UTF-16LE. CyberChef Base64 decodes to UTF-16 bytes; read the result as wide characters.",
+  "operations": [
+    { "op": "Find / Replace", "args": { "find": ".*-([Ee]|-[Ee]c|ncoded[Cc]ommand)\\s+", "replace": "" } },
+    { "op": "From Base64", "args": { "removeNonAlphChars": false, "strictMode": false } },
+    { "op": "To Hex", "args": { "delimiter": "", "lowerCase": false } }
+  ]
+}

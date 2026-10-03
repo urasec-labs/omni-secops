@@ -1,0 +1,73 @@
+name: ssa-validate
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    - cron: "17 3 * * 1"     # weekly upstream drift check
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Structure and reference integrity
+        run: python tools/ssactl.py verify --root . --strict
+
+      - name: Control coverage
+        run: python tools/ssactl.py verify --root . --coverage
+
+      - name: Schema validation (level 1, stdlib)
+        run: python tools/ssactl.py validate --root .
+
+      - name: Schema validation (level 2, full draft 2020-12)
+        run: |
+          python -m pip install --quiet --disable-pip-version-check "jsonschema>=4.22"
+          python tools/ssactl.py validate --root . --strict-json
+
+      - name: Build index and check determinism
+        run: |
+          python tools/ssactl.py index --root .
+          sha256sum 03-wordlists/index/export/fuzz-words.txt
+          python tools/ssactl.py index --root .
+          sha256sum 03-wordlists/index/export/fuzz-words.txt
+
+      - name: Lab estate healthcheck
+        run: python 11-automation/scripts/lab_healthcheck.py --root .
+
+      - name: Suricata rule syntax
+        run: |
+          docker run --rm -v "$PWD/06-defense/suricata/rules:/rules:ro" \
+            suricata/suricata:7.0.10 \
+            suricata -T -S /rules/ssa-web-attacks.rules
+
+      - name: Archive statistics
+        run: python tools/ssactl.py stats --root . | tee stats.txt
+
+      - name: Publish statistics artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ssa-stats
+          path: stats.txt
+
+  drift:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'schedule'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Upstream drift report
+        continue-on-error: true
+        run: python tools/ssactl.py diff --upstream --root .

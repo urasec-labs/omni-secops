@@ -1,0 +1,9 @@
+# Sovereign Security Archive runtime requirements.
+# The control plane and all generators are stdlib-only by design so the
+# archive can be built on an air-gapped host.
+
+# --- optional developer tooling (uncomment to enable) ---
+# ruff>=0.5
+# mypy>=1.10
+# jsonschema>=4.22      # only needed for `ssactl validate --strict-json`
+# pyyaml>=6.0           # only needed for YAML rule linting

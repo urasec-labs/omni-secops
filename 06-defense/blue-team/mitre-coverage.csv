@@ -1,0 +1,38 @@
+technique_id,tactic,name,offensive_artifacts,evasion_ids,detection_artifacts,coverage_state,gap_note,last_reviewed
+T1059.001,Execution,PowerShell,05-engines/metasploit,EV-WIN-0009,ssa_windows_lolbin_anomaly.yml,full,,2026-01-15
+T1059.003,Execution,Windows Command Shell,05-engines/metasploit,EV-WIN-0001,ssa_windows_lolbin_anomaly.yml,full,,2026-01-15
+T1059.004,Execution,Unix Shell,05-engines/metasploit,EV-LNX-0002,ssa_interpreter_shell.yml,full,,2026-01-15
+T1059.006,Execution,Python,05-engines/metasploit,EV-LNX-0005,ssa_interpreter_shell.yml,full,,2026-01-15
+T1003.006,Credential Access,DCShadow,02-payloads/os/linux/payloads.json,,ssa_ad_dcsync.yml,full,,2026-01-15
+T1021.002,Remote Services,SMB/Windows Admin Shares,05-engines/metasploit,EV-WIN-0001,ssa_windows_psexec.yml,full,,2026-01-15
+T1027,Defense Evasion,Obfuscated Files or Information,04-evasion,EV-WIN-0010,ssa_windows_lolbin_anomaly.yml,offensive-only,,2026-01-15
+T1047,Execution,Windows Management Instrumentation,05-engines/metasploit,EV-WIN-0013,ssa_windows_wmi_exec.yml,full,,2026-01-15
+T1053.003,Persistence,Cron,04-evasion/linux/persistence.md,EV-LNX-0016,ssa_linux_cron_persistence.yml,full,,2026-01-15
+T1053.005,Persistence,Scheduled Task/Job,04-evasion/windows/sushi.md,EV-WIN-0003,ssa_windows_schtasks.yml,full,,2026-01-15
+T1068,Privilege Escalation,Exploitation for Privilege Escalation,02-payloads/os,EV-CTR-0001,ssa_kubectl_exec_pod.yml,offensive-only,Kubernetes audit not enabled by default,2026-01-15
+T1078,Defense Evasion,Valid Accounts,05-engines,EV-CI-0001,ssa_cloud_iam_anomaly.yml,full,,2026-01-15
+T1083,Discovery,File and Directory Discovery,05-engines/metasploit,,,gap,No host rule for brute-force filesystem enumeration,2026-01-15
+T1090,Proxy,T1090 Proxy,01-intel/playbooks/network/pivoting.md,EV-LNX-0015,ssa_ssh_pivot.yml,full,,2026-01-15
+T1098.004,Persistence,SSH Authorized Keys,02-payloads/os/linux/payloads.json,EV-LNX-0003,ssa_linux_authorized_keys.yml,full,,2026-01-15
+T1105,Ingress Tool Transfer,Ingress Tool Transfer,04-evasion/windows/sushi.md,EV-WIN-0005,ssa_windows_certutil.yml,full,,2026-01-15
+T1110.003,Credential Access,Password Spraying,03-wordlists/credentials,,ssa_linux_ssh_bruteforce.yml,full,,2026-01-15
+T1134.005,Privilege Escalation,Additional Cloud Roles,01-intel/playbooks/active-directory/kerberos-attacks.md,,ssa_ad_constrained_delegation.yml,full,,2026-01-15
+T1190,Initial Access,Exploit Public-Facing Application,02-payloads/web,EV-WIN-0007,ssa_web_sqli_probe.yml,full,,2026-01-15
+T1195.002,Initial Access,Supply Chain Compromise,04-evasion/containers,EV-CI-0001,ssa_jenkins_groovy_console.yml,full,,2026-01-15
+T1218.003,Defense Evasion,Windows Management Instrumentation,04-evasion/windows/sushi.md,EV-WIN-0010,ssa_windows_lolbin_anomaly.yml,full,,2026-01-15
+T1218.005,Defense Evasion,Mshta,04-evasion/windows/sushi.md,EV-WIN-0007,ssa_windows_mshta.yml,full,,2026-01-15
+T1218.010,Defense Evasion,Regsvr32,04-evasion/windows/sushi.md,EV-WIN-0006,ssa_windows_regsvr32.yml,full,,2026-01-15
+T1486,Impact,Data Encrypted for Impact,09-labs/emulations,EV-LNX-0016,ssa_linux_mass_encryption.yml,full,,2026-01-15
+T1490,Impact,Inhibit System Recovery,06-defense/ir,,ssa_windows_shadow_copy_delete.yml,full,,2026-01-15
+T1548.003,Privilege Escalation,Bypass User Account Control,04-evasion/linux/sudo-lpe.md,EV-LNX-0007,ssa_linux_sudo_nonshell.yml,full,,2026-01-15
+T1552.001,Credential Access,Credentials In Files,04-evasion/macos/sudo.md,EV-MAC-0002,ssa_macos_keychain_read.yml,full,,2026-01-15
+T1552.005,Credential Access,Cloud Instance Metadata API,02-payloads/cloud/payloads.json,,ssa_cloud_metadata_access.yml,full,,2026-01-15
+T1556.003,Credential Access,Create or Modify System Process,01-intel/playbooks/active-directory/kerberos-attacks.md,,ssa_ad_shadow_credentials.yml,full,,2026-01-15
+T1558.003,Credential Access,Kerberoasting,01-intel/playbooks/active-directory/kerberos-attacks.md,,ssa_ad_kerberoast.yml,full,,2026-01-15
+T1558.004,Credential Access,AS-REP Roasting,01-intel/playbooks/active-directory/kerberos-attacks.md,,ssa_ad_asrep_roast.yml,full,,2026-01-15
+T1567,Exfiltration,Exfiltration Over Web Service,02-payloads,,ssa_cloud_metadata_access.yml,detective-only,,2026-01-15
+T1570,Lateral Movement,File Transfer Tools,01-intel/playbooks/network/pivoting.md,,ssa_ssh_pivot.yml,full,,2026-01-15
+T1609,Execution,Container Administration Command,04-evasion/containers,EV-CTR-0002,ssa_kubectl_exec_pod.yml,full,,2026-01-15
+T1610,Privilege Escalation,Deploy Container,04-evasion/containers,EV-CTR-0005,ssa_docker_privileged_run.yml,full,,2026-01-15
+T1649,Privilege Escalation,Steal or Forge Authentication Certificates,01-intel/playbooks/active-directory/kerberos-attacks.md,,ssa_ad_adcs_abuse.yml,offensive-only,ESC1 depends on template misconfiguration,2026-01-15
+T1595,Active Scanning,Active Scanning,01-intel/playbooks/network,EV-LNX-0001,ssa_network_scan.yml,full,,2026-01-15

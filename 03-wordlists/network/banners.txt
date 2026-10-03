@@ -1,0 +1,42 @@
+# Banner-grabbing dictionary and product grep patterns.
+# provenance: SECLISTS@master@2026-01-14 + h4cker@master@2026-01-09
+Apache
+nginx
+Microsoft-IIS
+OpenSSH
+ssh-2.0
+vsftpd
+ProFTPD
+FileZilla
+Samba
+smb
+PostgreSQL
+MySQL
+MongoDB
+Redis
+PostgreSQL DB
+Microsoft SQL Server
+Oracle Database
+Kibana
+Grafana
+Jenkins
+GitLab
+Kubernetes
+Docker
+kube-apiserver
+Jetty
+Tomcat
+JBoss
+WebLogic
+WebSphere
+Gunicorn
+uWSGI
+OpenResty
+Lighttpd
+CouchDB
+Elasticsearch
+InfluxDB
+RabbitMQ
+Zookeeper
+etcd
+Vault

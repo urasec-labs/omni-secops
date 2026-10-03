@@ -1,0 +1,38 @@
+technique_id,tactic,name,playbooks,payload_ids,wordlists,evasion_ids,modules,sigma_rules,wazuh_rules,suricata_sids,emulations,coverage_state,gap_note,last_reviewed
+T1059.001,Execution,PowerShell,PB-WINDOWS-EXEC,,,EV-WIN-0009,post/multi/reverse_ssh,ssa_windows_lolbin_anomaly.yml,86718,3001308,,full,,2026-01-15
+T1059.003,Execution,Windows Command Shell,PB-WINDOWS-EXEC,,,EV-WIN-0001,exploit/multi/handler,ssa_windows_psexec.yml,86710,3001301,EV-WIN-0001,full,,2026-01-15
+T1059.004,Execution,Unix Shell,PB-LINUX-EXEC,PL-OS-LNX-0001,shell-words,EV-LNX-0002,post/multi/reverse_ssh,ssa_linux_editor_shell.yml,101001,,,full,,2026-01-15
+T1059.006,Execution,Python,PB-LINUX-EXEC,PL-OS-LNX-0002,,EV-LNX-0005,,ssa_interpreter_shell.yml,101002,,,full,,2026-01-15
+T1003.006,Credential Access,DCShadow,PB-AD-KERBEROS,,,EV-WIN-0001,post/windows/gather/enum_domains,ssa_ad_dcsync.yml,86750,,EV-AD-0001,full,,2026-01-15
+T1021.002,Remote Services,SMB Admin Shares,PB-AD-LATERAL,,,EV-WIN-0001,exploit/windows/smb/psexec,ssa_windows_psexec.yml,86710,3001301,EV-WIN-0001,full,,2026-01-15
+T1027,Defense Evasion,Obfuscation,PB-WINDOWS-EXEC,PL-OS-LNX-0002,,EV-WIN-0010,evasion/windows/defender/processhacker,,86719,,,offensive-only,No portable detection for generic obfuscation,2026-01-15
+T1047,Execution,WMI,PB-AD-LATERAL,,,EV-WIN-0013,exploit/windows/smb/wmi_exec,ssa_windows_wmi_exec.yml,86722,,EV-WIN-0013,full,,2026-01-15
+T1053.003,Persistence,Cron,PB-LINUX-PERSIST,PL-OS-LNX-0004,,EV-LNX-0016,,ssa_linux_cron_persistence.yml,101010,3001201,,full,,2026-01-15
+T1053.005,Persistence,Scheduled Task,PB-WINDOWS-PERSIST,,,EV-WIN-0003,exploit/windows/smb/smb_exec,ssa_windows_schtasks.yml,86712,3001302,,full,,2026-01-15
+T1068,Privilege Escalation,Exploitation for PrivEsc,PB-CONTAINER-ESCAPE,,,EV-CTR-0001,exploit/linux/local/docker,ssa_docker_privileged_run.yml,86730,,EV-CTR-0001,offensive-only,K8s audit not enabled by default,2026-01-15
+T1078,Defense Evasion,Valid Accounts,PB-AD-KERBEROS,PL-API-0008,userpass-combinations.txt,EV-CI-0001,,ssa_cloud_iam_anomaly.yml,86751,,,full,,2026-01-15
+T1083,Discovery,File and Directory Discovery,PB-NET-ENUM,,,,auxiliary/scanner/filesystem/dir_file_enum,,,,,gap,No host rule for brute-force filesystem enumeration,2026-01-15
+T1090,Proxy,Proxy,PB-NET-PIVOT,,,EV-LNX-0015,post/multi/reverse_ssh,ssa_ssh_pivot.yml,101020,3001207,,full,,2026-01-15
+T1098.004,Persistence,SSH Authorized Keys,PB-LINUX-PERSIST,PL-OS-LNX-0003,,EV-LNX-0003,,ssa_linux_authorized_keys.yml,101011,,,full,,2026-01-15
+T1105,Ingress Tool Transfer,Ingress Tool Transfer,PB-WINDOWS-EXEC,,,EV-WIN-0005,auxiliary/downloader/HttpClient,ssa_windows_certutil.yml,86714,3001202,,full,,2026-01-15
+T1110.003,Credential Access,Password Spraying,PB-WEB-AUTHBYPASS,PL-API-0008,common-passwords.txt,,,ssa_linux_ssh_bruteforce.yml,100011,3001404,,full,,2026-01-15
+T1134.005,Privilege Escalation,Constrained Delegation,PB-AD-KERBEROS,,,,post/windows/escalate/constrained_delegation,ssa_ad_constrained_delegation.yml,86752,,,full,,2026-01-15
+T1190,Initial Access,Exploit Public-Facing App,PB-WEB-SQLI|PB-WEB-XSS|PB-WEB-SSRF,PL-WEB-SQLI-0001|PL-WEB-XSS-0001|PL-WEB-SSRF-0010,injection-words.txt|xss-words.txt|ssrf-words.txt,EV-WIN-0007,exploit/multi/http/struts_code_exec,ssa_web_sqli_probe.yml,100020,3001001,CH-001,full,,2026-01-15
+T1195.002,Initial Access,Supply Chain Compromise,PB-CICD-ABUSE,,,EV-CI-0001,,ssa_jenkins_groovy_console.yml,86740,3001401,,full,,2026-01-15
+T1218.003,Defense Evasion,System Binary Proxy Execution,PB-WINDOWS-EXEC|PB-WINDOWS-PRIVESC,,,EV-WIN-0010|EV-WIN-0002,evasion/windows/defender/processhacker,ssa_windows_lolbin_anomaly.yml,86719,,EV-WIN-0001,full,,2026-01-15
+T1218.005,Defense Evasion,Mshta,PB-WINDOWS-EXEC,,,EV-WIN-0007,exploit/windows/smb/smb_delivery,ssa_windows_mshta.yml,86716,3001203,,full,,2026-01-15
+T1218.010,Defense Evasion,Regsvr32,PB-WINDOWS-EXEC,,,EV-WIN-0006,exploit/windows/smb/smb_delivery,ssa_windows_regsvr32.yml,86715,3001202,,full,,2026-01-15
+T1486,Impact,Data Encrypted for Impact,PB-RANSOMWARE,PL-OS-LNX-0004,,EV-LNX-0016,evasion/linux/last_stage/encryptor,ssa_linux_mass_encryption.yml,86801,,,full,,2026-01-15
+T1490,Impact,Inhibit System Recovery,PB-RANSOMWARE,,,,,ssa_windows_shadow_copy_delete.yml,86802,,,full,,2026-01-15
+T1548.003,Privilege Escalation,Bypass UAC / sudo abuse,PB-LINUX-PRIVESC|PB-WINDOWS-PRIVESC,PL-OS-LNX-0007,binaries-linux.txt,EV-LNX-0007,exploit/linux/sudo/local,ssa_linux_sudo_nonshell.yml,101101,,,full,,2026-01-15
+T1552.001,Credential Access,Credentials In Files,PB-MAC-CREDS,PL-OS-LNX-0003,jwt-secrets.txt,EV-MAC-0002,,ssa_macos_keychain_read.yml,86725,,,full,,2026-01-15
+T1552.005,Credential Access,IMDS,PB-CLOUD-AWS-IAM,PL-CLOUD-0002,,,auxiliary/gather/cloud/cloud_metadata,ssa_cloud_metadata_access.yml,86753,3001003,,full,,2026-01-15
+T1556.003,Credential Access,Shadow Credentials,PB-AD-KERBEROS,,,,post/windows/gather/enum_domains,ssa_ad_shadow_credentials.yml,86754,,EV-AD-0001,full,,2026-01-15
+T1558.003,Credential Access,Kerberoasting,PB-AD-KERBEROS,,,EV-WIN-0003,,ssa_ad_kerberoast.yml,86751,,,full,,2026-01-15
+T1558.004,Credential Access,AS-REP Roasting,PB-AD-KERBEROS,,,,,ssa_ad_asrep_roast.yml,86755,,,full,,2026-01-15
+T1567,Exfiltration,Exfiltration Over Web Service,PB-EXFIL,,PL-CLOUD-0001,,,,ssa_cloud_metadata_access.yml,86753,3001205,,detective-only,No egress volume baseline rule,2026-01-15
+T1570,Lateral Movement,File Transfer Tools,PB-NET-PIVOT,,,EV-LNX-0015,post/multi/reverse_ssh,ssa_ssh_pivot.yml,101020,3001207,,full,,2026-01-15
+T1609,Execution,Container Admin Command,PB-CONTAINER-ESCAPE,,,EV-CTR-0002,,ssa_kubectl_exec_pod.yml,86731,,,full,,2026-01-15
+T1610,Privilege Escalation,Deploy Container,PB-CONTAINER-ESCAPE,PL-OS-LNX-0008,,EV-CTR-0001|EV-CTR-0005,exploit/linux/local/docker,ssa_docker_privileged_run.yml,101004,,EV-CTR-0001,full,,2026-01-15
+T1649,Privilege Escalation,ADCS Abuse,PB-AD-KERBEROS,,,,post/windows/gather/enum_domains,ssa_ad_adcs_abuse.yml,86756,,,offensive-only,ESC1 depends on template misconfiguration,2026-01-15
+T1595,Active Scanning,Active Scanning,PB-NET-ENUM,,,EV-LNX-0001,auxiliary/scanner/tcp/portscan,ssa_network_scan.yml,86700,3001401,,full,,2026-01-15

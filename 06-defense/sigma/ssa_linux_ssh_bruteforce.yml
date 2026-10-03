@@ -1,0 +1,15 @@
+title: linux ssh bruteforce
+id: ssa_ssa_linux_ssh_bruteforce
+status: experimental
+description: Auto-tracked detection for linux ssh bruteforce under the Sovereign Security Archive crosswalk.
+author: Sovereign Security Archive
+date: 2026-01-15
+logsource:
+  product: windows
+  category: process_creation
+detection:
+  selection:
+    CommandLine|contains: 'linux_ssh_bruteforce'
+  condition: selection
+level: high
+tags: [attack.defense_evasion]

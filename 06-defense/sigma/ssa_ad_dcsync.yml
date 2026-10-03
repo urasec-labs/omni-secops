@@ -1,0 +1,39 @@
+title: DCSync - directory replication request from a non-domain-controller host
+id: 3c9b77aa-9d3d-4f0c-9c0f-2b5a1c3e77aa
+status: test
+description: 4662 with a directory replication GUID on any host that is not a DC is a high-fidelity indicator of DCSync.
+author: Sovereign Security Archive
+date: 2026-01-15
+references:
+  - https://attack.mitre.org/techniques/T1003/006/
+  - 01-intel/playbooks/active-directory/kerberos-attacks.md
+  - 00-governance/threat-model.md
+logsource:
+  product: windows
+  service: security
+detection:
+  selection_replication_guid:
+    ObjectType|contains:
+      - '1131f6aa-9c07-11d1-f79f-00c04fc2dcd2'  # GetNCChanges
+      - '1131f6ad-9c07-11d1-f79f-00c04fc2dcd2'  # GetDeltas
+      - '1131f6ae-9c07-11d1-f79f-00c04fc2dcd2'  # GetDeltasAddNC
+      - '89e95b76-444d-4c62-991a-0facbeda640c'  # GetChanges
+      - '89e95b77-444d-4c62-991a-0facbeda640c'  # GetAllChanges
+  selection_event:
+    EventID: 4662
+  filter_dc:
+    ObjectServer|contains: '\\DC'
+  condition: selection_replication_guid and selection_event and not 1 of filter_dc
+fields:
+  - SubjectUserName
+  - ObjectName
+  - ObjectServer
+  - IpAddress
+  - Properties
+falsepositives:
+  - Legitimate third-party directory synchronisation products
+  - Authorised backup appliances (must be allow-listed by host, not globally)
+level: critical
+tags:
+  - attack.credential_access
+  - attack.t1003.006

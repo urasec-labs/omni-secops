@@ -1,0 +1,13 @@
+{
+  "name": "SSA - reassemble DNS exfiltration subdomains",
+  "description": "Extracts hex-encoded data segments from queried subdomains, concatenates them in label order and decodes to raw bytes.",
+  "author": "Sovereign Security Archive",
+  "created": "2026-01-15",
+  "notes": "Feed the list of queried hostnames from 08-threatintel or the proxy log. Manual step: sort segments by their leading sequence number before concatenating.",
+  "operations": [
+    { "op": "Find / Replace", "args": { "find": "^[a-z0-9]+\\.exfil\\.example\\.", "replace": "" } },
+    { "op": "Split", "args": { "delimiter": "\\n", "join": "" } },
+    { "op": "From Hex", "args": { "space": "none", "ignoreInvalidChar": true } },
+    { "op": "Show on image", "args": { "stretch": 1, "scale": 10 } }
+  ]
+}

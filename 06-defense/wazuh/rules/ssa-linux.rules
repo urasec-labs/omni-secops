@@ -1,0 +1,86 @@
+<!--
+  Sovereign Security Archive - Wazuh Linux host rules
+  rule ids 101000-101999 (SSA-owned, linux)
+  mapping: 10-crosswalk/evasion-detection/evasion-to-detection.csv
+-->
+<group name="ssa,linux,">
+
+  <group name="ssa,linux,privesc,">
+    <!-- 101000 - EV-LNX-0001 find -exec shell -->
+    <rule id="101000" level="12">
+      <if_sid>81151</if_sid>
+      <regex>find\s+.*-exec\s+/(bin|usr/bin)/(ba)?sh</regex>
+      <description>SSA EV-LNX-0001: find executing a shell (GTFOBins pattern).</description>
+      <mitigation>Remove NOPASSWD from find; see 04-evasion/linux/sudo-lpe.md</mitigation>
+    </rule>
+
+    <!-- 101001 - EV-LNX-0002 editor/pager escaping to a shell -->
+    <rule id="101001" level="12">
+      <if_sid>81151</if_sid>
+      <regex>(vim?|vi|nano|less|more|view)\s+.*(\!sh|:[0-9]*!?/(bin|usr/bin)/(ba)?sh)</regex>
+      <description>SSA EV-LNX-0002: editor or pager spawning an interactive shell.</description>
+    </rule>
+
+    <!-- 101002 - EV-LNX-0005/0006 interpreter one-liner -->
+    <rule id="101002" level="10">
+      <if_sid>81151</if_sid>
+      <regex>(perl|python3?|ruby|php)\s+-[ec]\s+.*(exec|system|popen|os\.system|subprocess)</regex>
+      <description>SSA EV-LNX-0005: interpreter one-liner with command execution primitive.</description>
+    </rule>
+
+    <!-- 101003 - EV-LNX-0008 SUID shell copy -->
+    <rule id="101003" level="14">
+      <if_sid>81151</if_sid>
+      <regex>chmod\s+[0-7]*[4][0-7]{3}\s+.*/(ba)?sh</regex>
+      <description>SSA EV-LNX-0008: setuid bit applied to a shell.</description>
+    </rule>
+
+    <!-- 101004 - EV-LNX-0017 / EV-CTR-0005 nsenter into PID 1 -->
+    <rule id="101004" level="13">
+      <if_sid>81151</if_sid>
+      <match>nsenter -t 1</match>
+      <description>SSA EV-CTR-0005: nsenter targeting PID 1 - container escape indicator.</description>
+    </rule>
+  </group>
+
+  <group name="ssa,linux,persistence,">
+    <!-- 101010 - EV-LNX-0016 cron persistence -->
+    <rule id="101010" level="12">
+      <if_sid>81151</if_sid>
+      <match>crontab -</match>
+      <description>SSA EV-LNX-0016: crontab modified.</description>
+    </rule>
+
+    <!-- 101011 - authorized_keys modification (T1098.004) -->
+    <rule id="101011" level="13">
+      <if_sid>87101,87102,550,554</if_sid>
+      <match>.ssh/authorized_keys</match>
+      <description>SSA: SSH authorized_keys file modified.</description>
+      <mitigation>Review key fingerprints; enforce host key management.</mitigation>
+    </rule>
+
+    <!-- 101012 - ld.so.preload modification (rootkit indicator) -->
+    <rule id="101012" level="14">
+      <if_sid>550,554,87101</if_sid>
+      <match>ld.so.preload</match>
+      <description>SSA: dynamic linker preload list modified.</description>
+    </rule>
+  </group>
+
+  <group name="ssa,linux,network,">
+    <!-- 101020 - EV-LNX-0015 ssh reverse tunnel via ProxyCommand -->
+    <rule id="101020" level="12">
+      <if_sid>5716</if_sid>
+      <regex>ProxyCommand\s+.*(sh|bash|nc|ncat|python|perl)\s+-c</regex>
+      <description>SSA EV-LNX-0015: ssh ProxyCommand shell execution - possible tunnel.</description>
+    </rule>
+
+    <!-- 101021 - /dev/tcp reverse shell pattern -->
+    <rule id="101021" level="14">
+      <if_sid>81151</if_sid>
+      <match>/dev/tcp/</match>
+      <description>SSA: bash /dev/tcp reverse shell primitive.</description>
+    </rule>
+  </group>
+
+</group>

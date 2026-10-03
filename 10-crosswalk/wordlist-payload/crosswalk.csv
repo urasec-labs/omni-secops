@@ -1,0 +1,54 @@
+cwe_id,context,surface,token,sha256,origin,payload_id,fuzz_wordlist,confidence,playbook,detections
+CWE-89,query,parameter,' OR '1'='1,,both,PL-WEB-SQLI-0001,injection-words.txt,1.0,PB-WEB-SQLI,3001001|100020
+CWE-89,query,parameter,' OR '1'='1'-- -,,,both,PL-WEB-SQLI-0002,injection-words.txt,1.0,PB-WEB-SQLI,3001001|100020
+CWE-89,query,parameter,' OR '1'='1#,,,both,PL-WEB-SQLI-0003,injection-words.txt,1.0,PB-WEB-SQLI,3001001|100020
+CWE-89,query,parameter,admin'-- -,,,payload,PL-WEB-SQLI-0004,injection-words.txt,0.6,PB-WEB-SQLI,3001001|100020
+CWE-89,query,parameter,') OR ('1'='1,,,both,PL-WEB-SQLI-0005,injection-words.txt,1.0,PB-WEB-SQLI,3001001|100020
+CWE-89,numeric,parameter,1 OR 1=1,,,both,PL-WEB-SQLI-0006,injection-words.txt,1.0,PB-WEB-SQLI,3001001|100020
+CWE-89,identifier,parameter,ORDER BY 10,,,both,PL-WEB-SQLI-0010,injection-words.txt,1.0,PB-WEB-SQLI,3001001
+CWE-89,query,parameter,UNION SELECT NULL,,,both,PL-WEB-SQLI-0020,injection-words.txt,1.0,PB-WEB-SQLI,3001001
+CWE-89,query,parameter,UNION SELECT NULL,NULL,,,both,PL-WEB-SQLI-0021,injection-words.txt,1.0,PB-WEB-SQLI,3001001
+CWE-89,query,parameter,UNION SELECT NULL,NULL,NULL,,,both,PL-WEB-SQLI-0022,injection-words.txt,1.0,PB-WEB-SQLI,3001001
+CWE-89,query,parameter,SLEEP(5),,,both,PL-WEB-SQLI-0080,injection-words.txt,1.0,PB-WEB-SQLI,3001001
+CWE-89,query,parameter,pg_sleep(5),,,payload,PL-WEB-SQLI-0081,injection-words.txt,0.6,PB-WEB-SQLI,3001001
+CWE-89,query,parameter,WAITFOR DELAY,,,payload,PL-WEB-SQLI-0082,injection-words.txt,0.6,PB-WEB-SQLI,3001001
+CWE-89,header,header,OR 1=1,,,payload,PL-WEB-SQLI-0090,injection-words.txt,0.6,PB-WEB-SQLI,100020
+CWE-89,cookie,cookie,OR 1=1,,,payload,PL-WEB-SQLI-0091,injection-words.txt,0.6,PB-WEB-AUTHBYPASS,100020
+CWE-79,html-text,parameter,<script>alert(1)</script>,,,both,PL-WEB-XSS-0001,xss-words.txt,1.0,PB-WEB-XSS,3001006|100021
+CWE-79,html-text,parameter,<img src=x onerror=alert(1)>,,,both,PL-WEB-XSS-0002,xss-words.txt,1.0,PB-WEB-XSS,3001006|100021
+CWE-79,html-text,parameter,<svg/onload=alert(1)>,,,both,PL-WEB-XSS-0003,xss-words.txt,1.0,PB-WEB-XSS,3001006|100021
+CWE-79,attribute,parameter," onmouseover=alert(1) x=",,,both,PL-WEB-XSS-0004,xss-words.txt,1.0,PB-WEB-XSS,3001006
+CWE-79,attribute,parameter,' onmouseover=alert(1) x=',,,both,PL-WEB-XSS-0005,xss-words.txt,1.0,PB-WEB-XSS,3001006
+CWE-79,script,parameter,</script><img src=x onerror=alert(1)>,,,both,PL-WEB-XSS-0006,xss-words.txt,1.0,PB-WEB-XSS,3001006
+CWE-79,js-string,parameter,'-alert(1)-',,,payload,PL-WEB-XSS-0007,xss-words.txt,0.6,PB-WEB-XSS,100021
+CWE-79,url,parameter,javascript:alert(1),,,both,PL-WEB-XSS-0008,xss-words.txt,1.0,PB-WEB-XSS,3001006
+CWE-79,dom,parameter,document.domain,,,payload,PL-WEB-XSS-0009,xss-words.txt,0.6,PB-WEB-XSS,100021
+CWE-79,html-text,parameter,{{7*7}},,,both,PL-WEB-XSS-0010,ssti-words.txt,1.0,PB-WEB-XSS,3001006
+CWE-79,html-text,parameter,${7*7},,,both,PL-WEB-XSS-0011,ssti-words.txt,1.0,PB-WEB-XSS,3001006
+CWE-79,html-text,parameter,{{constructor.constructor('alert(1)')()}},,,payload,PL-WEB-XSS-0014,ssti-words.txt,0.6,PB-WEB-XSS,100021
+CWE-918,url,url,http://127.0.0.1/,,,both,PL-WEB-SSRF-0001,ssrf-words.txt,1.0,PB-WEB-SSRF,3001003
+CWE-918,url,url,http://0/,,,both,PL-WEB-SSRF-0002,ssrf-words.txt,1.0,PB-WEB-SSRF,3001003
+CWE-918,url,url,http://[::1]/,,,both,PL-WEB-SSRF-0003,ssrf-words.txt,1.0,PB-WEB-SSRF,3001003
+CWE-918,url,url,http://2130706433/,,,both,PL-WEB-SSRF-0004,ssrf-words.txt,1.0,PB-WEB-SSRF,3001003
+CWE-918,url,url,http://0x7f.0.0.1/,,,both,PL-WEB-SSRF-0005,ssrf-words.txt,1.0,PB-WEB-SSRF,3001003
+CWE-918,url,url,http://127.1/,,,both,PL-WEB-SSRF-0006,ssrf-words.txt,1.0,PB-WEB-SSRF,3001003
+CWE-918,url,url,http://169.254.169.254/latest/meta-data/,,,both,PL-WEB-SSRF-0010,ssrf-words.txt,1.0,PB-WEB-SSRF,3001003|100022
+CWE-918,url,url,http://169.254.169.254/latest/api/token,,,payload,PL-WEB-SSRF-0011,ssrf-words.txt,0.6,PB-WEB-SSRF,100022
+CWE-918,url,url,http://metadata.google.internal/computeMetadata/v1/,,,both,PL-WEB-SSRF-0012,ssrf-words.txt,1.0,PB-WEB-SSRF,3001003
+CWE-918,url,url,http://169.254.169.254/metadata/instance,,,payload,PL-WEB-SSRF-0013,ssrf-words.txt,0.6,PB-WEB-SSRF,100022
+CWE-918,url,url,file:///etc/passwd,,,both,PL-WEB-SSRF-0020,ssrf-words.txt,1.0,PB-WEB-SSRF,3001003
+CWE-918,url,url,gopher://127.0.0.1:6379/,,,payload,PL-WEB-SSRF-0021,ssrf-words.txt,0.6,PB-WEB-SSRF,3001003
+CWE-90,ldap,parameter,admin)(|(password=*,,,payload,PL-INFRA-0002,injection-words.txt,0.6,PB-WEB-SQLI,100020
+CWE-90,ldap,parameter,*),,,both,PL-INFRA-0001,injection-words.txt,1.0,PB-WEB-SQLI,100020
+CWE-20,nosql,body,"{""$ne"":null}",,,both,PL-INFRA-0010,injection-words.txt,1.0,PB-WEB-AUTHBYPASS,3001005
+CWE-502,jndi,jndi,${jndi:ldap://,fuzz,PL-INFRA-0020,injection-words.txt,0.4,PB-WEB-SSRF,3001004
+CWE-1336,template,parameter,{{config.items()}},,,payload,PL-WEB-SSTI-0002,ssti-words.txt,0.6,PB-WEB-XSS,3001006
+CWE-1336,template,parameter,${{T(java.lang.Runtime),,,payload,PL-WEB-SSTI-0010,ssti-words.txt,0.6,PB-WEB-XSS,3001006
+CWE-89,stack,parameter,xp_cmdshell,,,payload,PL-WEB-SQLI-0101,injection-words.txt,0.6,PB-WEB-SQLI,100020
+CWE-89,query,parameter,1' AND 1=1,,,fuzz,,,,0.4,PB-WEB-SQLI,3001001
+CWE-89,query,parameter,1 AND 1=2,,,fuzz,,,,0.4,PB-WEB-SQLI,3001001
+CWE-89,query,parameter,benchmark(5000000,,,fuzz,,,,0.4,PB-WEB-SQLI,3001001
+CWE-79,html-text,parameter,<body onload=alert(1)>,,,fuzz,,,,0.4,PB-WEB-XSS,3001006
+CWE-79,url,parameter,JaVaScRiPt:alert(1),,,fuzz,,,,0.4,PB-WEB-XSS,3001006
+CWE-918,url,url,http://localtest.me/,,,fuzz,,,,0.4,PB-WEB-SSRF,3001003
+CWE-918,url,url,http://169.254.169.254.nip.io/,,,payload,PL-WEB-SSRF-0024,ssrf-words.txt,0.6,PB-WEB-SSRF,3001003
